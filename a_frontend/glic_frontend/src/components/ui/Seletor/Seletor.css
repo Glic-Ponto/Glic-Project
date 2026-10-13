@@ -1,0 +1,9 @@
+.ui-seletor { display: grid; gap: var(--espaco-8); min-width: 0; }
+.ui-seletor label { font-size: var(--texto-rotulo-tamanho); font-weight: var(--texto-rotulo-peso); }
+.ui-seletor__controle { display: flex; align-items: center; position: relative; }
+.ui-seletor select { width: 100%; min-height: var(--alvo-44); padding: var(--espaco-12); padding-right: var(--espaco-32); appearance: none; border: var(--borda-1); border-radius: var(--raio-6); background: var(--cor-superficie); color: var(--cor-texto); }
+.ui-seletor__controle > svg { position: absolute; right: var(--espaco-12); pointer-events: none; }
+.ui-seletor select:focus { border: 2px solid var(--cor-texto); }
+.ui-seletor select:disabled { background: var(--cor-fundo); color: var(--cor-texto-secundario); }
+.ui-seletor--erro select { border: 2px solid var(--cor-erro); }
+.ui-seletor__erro { display: flex; align-items: center; gap: var(--espaco-4); color: var(--cor-erro); }

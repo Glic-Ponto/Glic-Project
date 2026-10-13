@@ -1,0 +1,4 @@
+.layout-interno { min-height: 100dvh; }
+.layout-interno__principal { min-width: 0; }
+.layout-interno__conteudo { min-width: 0; padding-bottom: var(--espaco-32); }
+@media (min-width: 1024px) { .layout-interno { display: grid; grid-template-columns: var(--largura-menu) minmax(0, 1fr); } }

@@ -1,0 +1,3 @@
+.ui-lista-itens { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--espaco-8); }
+.ui-lista-itens > li { min-width: 0; padding: var(--espaco-12); border-bottom: var(--borda-1); }
+.ui-lista-itens__esqueleto { height: 8rem; border: var(--borda-1); border-radius: var(--raio-6); background: var(--cor-fundo); }

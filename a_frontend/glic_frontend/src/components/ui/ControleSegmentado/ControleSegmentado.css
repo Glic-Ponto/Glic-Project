@@ -1,0 +1,4 @@
+.ui-segmentado { display: inline-flex; flex-wrap: wrap; gap: var(--espaco-4); padding: var(--espaco-4); border: var(--borda-1); border-radius: var(--raio-6); background: var(--cor-superficie); }
+.ui-segmentado__opcao { min-height: var(--alvo-44); padding: var(--espaco-8) var(--espaco-12); border: 0; border-radius: var(--raio-6); background: transparent; color: var(--cor-texto); }
+.ui-segmentado__opcao--ativa { background: var(--cor-secundaria); color: var(--cor-superficie); }
+.ui-segmentado__opcao:disabled { color: var(--cor-texto-secundario); }

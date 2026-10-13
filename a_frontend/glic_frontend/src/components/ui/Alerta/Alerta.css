@@ -1,0 +1,7 @@
+.ui-alerta { display: flex; align-items: flex-start; gap: var(--espaco-8); padding: var(--espaco-16); border-left: 4px solid currentColor; border-radius: var(--raio-6); background: var(--cor-superficie); box-shadow: var(--sombra-card); }
+.ui-alerta > svg { flex: 0 0 auto; }
+.ui-alerta--sucesso { color: var(--cor-sucesso); }
+.ui-alerta--alerta { color: var(--cor-alerta); }
+.ui-alerta--erro { color: var(--cor-erro); }
+.ui-alerta strong { display: block; margin-bottom: var(--espaco-4); }
+.ui-alerta > div { color: var(--cor-texto); }

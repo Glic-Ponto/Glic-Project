@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+* { box-sizing: border-box; }
+html { min-width: 320px; background: var(--cor-fundo); }
+body { margin: 0; color: var(--cor-texto); background: var(--cor-fundo); font-family: var(--fonte-principal); font-size: var(--texto-corpo-tamanho); line-height: var(--texto-corpo-altura); }
+button, input, select, textarea { font: inherit; }
+button, a, input, select, textarea, [tabindex]:not([tabindex="-1"]) { outline-offset: 2px; }
+:focus-visible { outline: var(--foco-anel); }
+h1 { margin: 0; font-size: var(--texto-h1-tamanho); font-weight: var(--texto-h1-peso); line-height: var(--texto-h1-altura); }
+h2 { margin: 0; font-size: var(--texto-h2-tamanho); font-weight: var(--texto-h2-peso); line-height: var(--texto-h2-altura); }
+h3 { margin: 0; font-size: var(--texto-h3-tamanho); font-weight: var(--texto-h3-peso); line-height: var(--texto-h3-altura); }
+p { margin: 0; }
+a { color: inherit; }
+button { cursor: pointer; }
+button:disabled { cursor: not-allowed; }
+.pagina-pendente { padding: var(--espaco-24) var(--espaco-16); }
+.pagina-pendente p { margin-top: var(--espaco-16); color: var(--cor-texto-secundario); }
+@media (min-width: 768px) { .pagina-pendente { padding: var(--espaco-32); } }
