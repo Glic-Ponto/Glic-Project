@@ -3,7 +3,7 @@ import "./LayoutAutenticacao.css";
 
 export default function LayoutAutenticacao() {
   return <main className="layout-autenticacao">
-    <aside className="layout-autenticacao__imagem" aria-hidden="true"><span>IMG</span></aside>
+    <aside className="layout-autenticacao__imagem"><span>Oficina DSom</span></aside>
     <section className="layout-autenticacao__conteudo"><Outlet /></section>
   </main>;
 }

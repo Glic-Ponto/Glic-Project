@@ -2,6 +2,6 @@
 .ui-tabela { width: 100%; border-collapse: collapse; background: var(--cor-superficie); font-size: var(--texto-tabela-tamanho); }
 .ui-tabela caption { padding: var(--espaco-8); text-align: left; color: var(--cor-texto-secundario); }
 .ui-tabela thead { background: var(--cor-secundaria); color: var(--cor-superficie); text-align: left; }
-.ui-tabela th, .ui-tabela td { padding: var(--espaco-12); white-space: nowrap; }
+.ui-tabela th, .ui-tabela td { padding: var(--espaco-8) var(--espaco-12); white-space: nowrap; }
 .ui-tabela tbody tr { border-top: var(--borda-1); }
 .ui-tabela__esqueleto { height: 10rem; border: var(--borda-1); border-radius: var(--raio-8); background: var(--cor-fundo); }

@@ -1,7 +1,4 @@
-.pagina-cadastro { position: relative; min-height: 100dvh; padding: var(--espaco-32) var(--espaco-16); background: var(--cor-fundo); }
-.pagina-cadastro h1 { margin: 0; text-align: center; font-size: var(--texto-h1-tamanho); font-weight: var(--texto-h1-peso); line-height: var(--texto-h1-altura); }
-.pagina-cadastro__formulario { display: grid; gap: var(--espaco-24); width: 100%; margin: var(--espaco-48) auto var(--espaco-32); }
-.pagina-cadastro__formulario > .ui-botao { width: 100%; }
-@media (min-width: 768px) { .pagina-cadastro { min-height: 100dvh; padding: 10.5vh var(--espaco-32) 6vh; } .pagina-cadastro__formulario { width: 90%; margin-top: 12.5vh; gap: var(--espaco-24); } .pagina-cadastro__formulario > .ui-botao { position: absolute; bottom: 6.1vh; left: 50%; width: 28%; transform: translateX(-50%); } }
-@media (min-width: 1024px) { .pagina-cadastro { padding-right: var(--espaco-48); padding-left: var(--espaco-48); } .pagina-cadastro__formulario { width: 90%; } }
-@media (max-width: 767px) { .pagina-cadastro__formulario { margin-top: var(--espaco-48); } }
+.pagina-cadastro { width: 100%; max-width: 30rem; margin: auto; padding: var(--espaco-32) var(--espaco-conteudo-x); background: var(--cor-fundo); }
+.pagina-cadastro h1 { margin: 0; text-align: center; }
+.pagina-cadastro__formulario { display: grid; gap: var(--espaco-secao); width: 100%; margin: var(--espaco-24) auto 0; }
+.pagina-cadastro__formulario > .ui-botao, .pagina-cadastro__acao, .pagina-cadastro__acao .ui-botao { width: 100%; }

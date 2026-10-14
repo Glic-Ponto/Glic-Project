@@ -1,1 +1,1 @@
-.ui-estado-vazio { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--espaco-8); min-height: 8rem; padding: var(--espaco-48) var(--espaco-16); color: var(--cor-texto-secundario); text-align: center; }
+.ui-estado-vazio { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--espaco-8); min-height: 8rem; padding: var(--espaco-24) var(--espaco-16); color: var(--cor-texto-secundario); text-align: center; }

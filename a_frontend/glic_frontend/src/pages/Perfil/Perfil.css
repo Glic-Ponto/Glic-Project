@@ -1,5 +1,5 @@
-.pagina-perfil { padding: var(--espaco-16); }
-.perfil-coluna { display: grid; gap: var(--espaco-24); width: 100%; margin: 0 auto; }
+.pagina-perfil { min-width: 0; }
+.perfil-coluna { display: grid; gap: var(--espaco-secao); width: 100%; margin: 0 auto; }
 .perfil-identificacao, .perfil-formularios { background: var(--cor-secundaria); color: var(--cor-superficie); border-radius: var(--raio-6); box-shadow: var(--sombra-card); }
 .perfil-identificacao { display: flex; flex-direction: column; align-items: center; gap: var(--espaco-16); padding: var(--espaco-24); text-align: center; }
 .perfil-identificacao__dados { min-width: 0; }
@@ -21,6 +21,11 @@
 .perfil-formularios .ui-campo input { background: var(--cor-superficie); }
 .perfil-formularios .ui-alerta { margin-bottom: var(--espaco-16); }
 .perfil-grupo:target { scroll-margin-top: var(--espaco-16); }
-@media (min-width: 768px) { .pagina-perfil { padding: var(--espaco-24); } .perfil-coluna { width: min(100%, 640px); } .perfil-identificacao { flex-direction: row; text-align: left; } .perfil-identificacao__acoes { width: min(36%, 12rem); margin-left: auto; } .perfil-grupo__cabecalho { flex-direction: row; align-items: center; justify-content: space-between; } .perfil-grupo__campos { grid-template-columns: repeat(2, minmax(0, 1fr)); } .perfil-grupo:nth-of-type(2) .perfil-grupo__campos { grid-template-columns: 1fr; } }
-@media (min-width: 1024px) { .pagina-perfil { padding: var(--espaco-32); } .perfil-coluna { width: 88%; max-width: none; } .perfil-identificacao { min-height: 25vh; padding: var(--espaco-24); } .perfil-formularios { min-height: 53vh; padding: var(--espaco-16); } .perfil-identificacao__acoes { width: 11rem; } .perfil-grupo__campos { grid-template-columns: 1fr; } .perfil-grupo:nth-of-type(2) .perfil-grupo__campos { grid-template-columns: 1fr; } }
-@media (min-width: 1440px) { .perfil-coluna { width: 88%; } .perfil-identificacao { padding: var(--espaco-24); } }
+@media (min-width: 768px) {
+  .perfil-coluna { max-width: 60rem; }
+  .perfil-identificacao { flex-direction: row; flex-wrap: wrap; text-align: left; padding: var(--padding-card); }
+  .perfil-identificacao__dados { flex: 1; }
+  .perfil-identificacao__acoes { width: 11rem; margin-left: auto; }
+  .perfil-grupo__cabecalho { flex-direction: row; align-items: center; justify-content: space-between; }
+  .perfil-grupo__campos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

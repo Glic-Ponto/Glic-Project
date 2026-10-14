@@ -1,11 +1,11 @@
-.ui-botao { display: inline-flex; align-items: center; justify-content: center; gap: var(--espaco-8); min-height: var(--alvo-44); padding: var(--espaco-12) var(--espaco-24); border: 1px solid transparent; border-radius: var(--raio-6); font-size: var(--texto-botao-tamanho); font-weight: var(--texto-botao-peso); line-height: var(--texto-botao-altura); transition: background .15s ease; }
+.ui-botao { display: inline-flex; align-items: center; justify-content: center; gap: var(--espaco-8); min-height: var(--altura-controle); padding: var(--espaco-controle-y) var(--espaco-16); max-width: 100%; border: 1px solid transparent; border-radius: var(--raio-6); font-size: var(--texto-botao-tamanho); font-weight: var(--texto-botao-peso); line-height: var(--texto-botao-altura); transition: background .15s ease; }
 .ui-botao--primario { background: var(--cor-primaria); color: var(--cor-superficie); }
 .ui-botao--primario:hover:not(:disabled), .ui-botao--primario:active:not(:disabled) { background: var(--cor-primaria-escura); }
 .ui-botao--secundario { background: var(--cor-secundaria); color: var(--cor-superficie); }
 .ui-botao--secundario:hover:not(:disabled), .ui-botao--secundario:active:not(:disabled) { background: var(--cor-secundaria-hover); }
 .ui-botao--terciario { background: transparent; color: var(--cor-texto); border-color: var(--cor-borda); }
 .ui-botao--terciario:hover:not(:disabled) { background: var(--cor-fundo); }
-.ui-botao--grande { min-height: 52px; }
+.ui-botao--grande { min-height: max(40px, var(--altura-controle)); }
 .ui-botao:disabled { background: var(--cor-fundo); color: var(--cor-texto-secundario); border-color: var(--cor-borda); }
 .ui-botao__loader { animation: ui-girar 1s linear infinite; }
 @keyframes ui-girar { to { transform: rotate(360deg); } }

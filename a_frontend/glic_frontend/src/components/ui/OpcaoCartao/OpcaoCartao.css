@@ -1,4 +1,4 @@
-.ui-opcao-cartao { display: grid; gap: var(--espaco-8); text-align: left; min-height: var(--alvo-44); padding: var(--espaco-16); border: var(--borda-1); border-radius: var(--raio-8); background: var(--cor-superficie); color: var(--cor-texto); }
+.ui-opcao-cartao { display: grid; gap: var(--espaco-8); text-align: left; min-height: var(--altura-controle); padding: var(--espaco-16); border: var(--borda-1); border-radius: var(--raio-8); background: var(--cor-superficie); color: var(--cor-texto); }
 .ui-opcao-cartao span { color: var(--cor-texto-secundario); font-size: var(--texto-tabela-tamanho); }
 .ui-opcao-cartao--selecionado { border: 2px solid var(--cor-primaria); }
 .ui-opcao-cartao:disabled { color: var(--cor-texto-secundario); background: var(--cor-fundo); }

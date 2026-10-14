@@ -1,2 +1,2 @@
-.ui-paginacao { display: flex; align-items: center; justify-content: center; gap: var(--espaco-16); margin-top: var(--espaco-16); }
+.ui-paginacao { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--espaco-8); margin-top: var(--espaco-16); }
 .ui-paginacao span { font-size: var(--texto-tabela-tamanho); }

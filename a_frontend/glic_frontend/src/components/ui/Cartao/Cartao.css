@@ -1,3 +1,3 @@
-.ui-cartao { min-width: 0; padding: var(--espaco-16); border: var(--borda-1); border-radius: var(--raio-8); background: var(--cor-superficie); box-shadow: var(--sombra-card); }
-.ui-cartao__titulo { margin-bottom: var(--espaco-16); }
+.ui-cartao { min-width: 0; padding: var(--padding-card); border: var(--borda-1); border-radius: var(--raio-8); background: var(--cor-superficie); box-shadow: var(--sombra-card); }
+.ui-cartao__titulo { margin-bottom: var(--espaco-12); }
 .ui-cartao__esqueleto { height: 8rem; border: var(--borda-1); border-radius: var(--raio-6); background: var(--cor-fundo); }

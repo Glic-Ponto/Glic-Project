@@ -1,4 +1,4 @@
-.ui-kpi { display: grid; align-content: start; gap: var(--espaco-8); min-width: 0; padding: var(--espaco-16); border: var(--borda-1); border-radius: var(--raio-8); background: var(--cor-superficie); box-shadow: var(--sombra-card); }
+.ui-kpi { display: grid; align-content: start; gap: var(--espaco-8); min-width: 0; padding: var(--padding-card); height: 100%; border: var(--borda-1); border-radius: var(--raio-8); background: var(--cor-superficie); box-shadow: var(--sombra-card); }
 .ui-kpi__titulo { color: var(--cor-texto-secundario); font-size: var(--texto-rotulo-tamanho); }
 .ui-kpi strong { font-size: var(--texto-kpi-tamanho); font-weight: var(--texto-kpi-peso); line-height: var(--texto-kpi-altura); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
 .ui-kpi__variacao { display: flex; align-items: center; gap: var(--espaco-4); font-size: var(--texto-legenda-tamanho); }

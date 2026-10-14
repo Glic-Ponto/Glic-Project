@@ -15,3 +15,11 @@ button:disabled { cursor: not-allowed; }
 .pagina-pendente { padding: var(--espaco-24) var(--espaco-16); }
 .pagina-pendente p { margin-top: var(--espaco-16); color: var(--cor-texto-secundario); }
 @media (min-width: 768px) { .pagina-pendente { padding: var(--espaco-32); } }
+
+/* Elementos flex e grid podem encolher sem ampliar a página. */
+input, select, textarea { min-width: 0; }
+button > svg { flex-shrink: 0; }
+@media (max-width: 767px) {
+  input, select, textarea { font-size: 1rem; }
+  .ui-campo input { font-size: 1rem; }
+}

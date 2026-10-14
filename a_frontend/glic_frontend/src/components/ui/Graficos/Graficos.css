@@ -1,6 +1,6 @@
 .ui-graficos__descricao { margin: calc(var(--espaco-8) * -1) 0 var(--espaco-16); color: var(--cor-texto-secundario); font-size: var(--texto-legenda-tamanho); }
-.ui-graficos__area { width: 100%; height: 15rem; }
-.ui-graficos__dados { margin-top: var(--espaco-16); font-size: var(--texto-tabela-tamanho); }
-.ui-graficos__dados summary { min-height: var(--alvo-44); cursor: pointer; display: flex; align-items: center; }
-.ui-graficos__dados table { border-collapse: collapse; width: 100%; }
+.ui-graficos__area { width: 100%; height: 12.5rem; min-width: 0; }
+.ui-graficos__dados { margin-top: var(--espaco-8); font-size: var(--texto-tabela-tamanho); }
+.ui-graficos__dados summary { min-height: var(--altura-controle); cursor: pointer; display: flex; align-items: center; }
+.ui-graficos__dados table { border-collapse: collapse; width: 100%; table-layout: fixed; overflow-wrap: anywhere; }
 .ui-graficos__dados th, .ui-graficos__dados td { padding: var(--espaco-8); border: var(--borda-1); text-align: left; }
