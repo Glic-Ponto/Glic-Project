@@ -1,4 +1,5 @@
 .layout-interno { min-height: 100dvh; }
 .layout-interno__principal { min-width: 0; }
-.layout-interno__conteudo { min-width: 0; padding: var(--espaco-secao) var(--espaco-conteudo-x); }
+.layout-interno__conteudo { min-width: 0; width: 100%; max-width: 1280px; margin-inline: auto; padding: var(--espaco-24) var(--espaco-conteudo-x); }
 @media (min-width: 1024px) { .layout-interno { display: grid; grid-template-columns: var(--largura-menu) minmax(0, 1fr); } }
+@media (max-width: 767px) { .layout-interno__conteudo { padding-top: var(--espaco-16); } }

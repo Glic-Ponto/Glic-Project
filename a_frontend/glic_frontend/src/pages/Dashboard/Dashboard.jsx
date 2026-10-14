@@ -4,18 +4,22 @@
  * A composição se empilha em telas menores conforme a grade responsiva.
  */
 import { useEffect, useState } from "react";
-import { AlertCircle, CircleDollarSign, ReceiptText, ShoppingCart, TicketPercent } from "lucide-react";
+import { AlertCircle } from "lucide-react";
+import AcoesCabecalho from "../../components/layout/AcoesCabecalho/AcoesCabecalho";
 import CartaoKpi from "../../components/ui/CartaoKpi/CartaoKpi";
 import Graficos from "../../components/ui/Graficos/Graficos";
 import ControleSegmentado from "../../components/ui/ControleSegmentado/ControleSegmentado";
 import EstadoVazio from "../../components/ui/EstadoVazio/EstadoVazio";
 import { obterResumoDashboard } from "../../services/dashboardService";
 import { textos } from "../../constants/textos";
+import { useAuth } from "../../contexts/AuthContext";
+import HistoricoFinanceiro from "./HistoricoFinanceiro";
 import "./Dashboard.css";
 
 const moeda = (valor) => new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(valor || 0);
 
 export default function Dashboard() {
+  const { usuario } = useAuth();
   const t = textos.dashboard;
   const [periodo, setPeriodo] = useState("hoje");
   const [resumo, setResumo] = useState(null);
@@ -33,22 +37,17 @@ export default function Dashboard() {
   }, [periodo]);
 
   const kpis = [
-    { titulo: t.faturamento, valor: moeda(resumo?.faturamento), icone: <CircleDollarSign aria-hidden="true" /> },
-    { titulo: t.vendasRealizadas, valor: String(resumo?.vendas ?? 0), icone: <ShoppingCart aria-hidden="true" /> },
-    { titulo: t.ticketMedio, valor: moeda(resumo?.ticketMedio), icone: <ReceiptText aria-hidden="true" /> },
-    { titulo: t.descontos, valor: moeda(resumo?.descontos), icone: <TicketPercent aria-hidden="true" /> }
+    { titulo: t.faturamento, valor: moeda(resumo?.faturamento) },
+    { titulo: t.vendasRealizadas, valor: String(resumo?.vendas ?? 0) },
+    { titulo: t.ticketMedio, valor: moeda(resumo?.ticketMedio) },
+    { titulo: t.descontos, valor: moeda(resumo?.descontos) }
   ];
 
-  return <section className="pagina-dashboard" aria-labelledby="dashboard-titulo">
-    <div className="dashboard__cabecalho">
-      <span className="dashboard__contexto">Visão consolidada da loja</span>
-      <div className="dashboard__acoes">
-        <ControleSegmentado rotulo="Período" opcoes={t.periodos} valor={periodo} onChange={setPeriodo} desabilitado={carregando} />
-      </div>
-    </div>
+  return <section className="pagina-dashboard" aria-labelledby="titulo-pagina">
+    <AcoesCabecalho><ControleSegmentado rotulo="Período" opcoes={t.periodos} valor={periodo} onChange={setPeriodo} desabilitado={carregando} /></AcoesCabecalho>
     {erro && <div className="dashboard__erro" role="alert" aria-live="assertive"><AlertCircle aria-hidden="true" />{t.erroConexao}</div>}
     <div className="dashboard__kpis">
-      {kpis.map((kpi) => <div className="dashboard__kpi" key={kpi.titulo}><div className="dashboard__kpi-icone">{kpi.icone}</div><CartaoKpi titulo={kpi.titulo} valor={kpi.valor} carregando={carregando} /></div>)}
+      {kpis.map((kpi) => <CartaoKpi key={kpi.titulo} titulo={kpi.titulo} valor={kpi.valor} carregando={carregando} />)}
     </div>
     <div className="dashboard__grafico-principal">
       {resumo && <Graficos titulo={t.faturamentoPeriodo} descricao="Valores de faturamento por dia no período selecionado." dados={resumo.faturamentoPorDia} tipo="linha" formatarValor={moeda} />}
@@ -68,5 +67,6 @@ export default function Dashboard() {
       <div><span>{t.despesas}</span><strong>{moeda(resumo?.despesas)}</strong></div>
       <div><span>{t.resultado}</span><strong>{moeda(resumo?.resultado)}</strong></div>
     </section>
+    {usuario?.perfil === "Gestor" && <HistoricoFinanceiro />}
   </section>;
 }

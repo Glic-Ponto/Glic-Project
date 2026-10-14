@@ -7,36 +7,36 @@
   --cor-primaria-escura: #A8121A;
   --cor-texto: #1A1A1A;
   --cor-texto-secundario: #525252;
-  --cor-borda: #8A8A8A;
+  --cor-borda: #C4C4C4;
   --cor-sucesso: #166534;
   --cor-alerta: #92400E;
   --cor-erro: #B91C1C;
   --fonte-principal: Inter, sans-serif;
-  --texto-h1-tamanho: 1.5rem;
+  --texto-h1-tamanho: 1.25rem;
   --texto-h1-peso: 700;
   --texto-h1-altura: 1.25;
-  --texto-h2-tamanho: 1.125rem;
+  --texto-h2-tamanho: 1rem;
   --texto-h2-peso: 600;
   --texto-h2-altura: 1.3;
-  --texto-h3-tamanho: 1rem;
+  --texto-h3-tamanho: .875rem;
   --texto-h3-peso: 600;
   --texto-h3-altura: 1.35;
   --texto-corpo-tamanho: .875rem;
   --texto-corpo-peso: 400;
   --texto-corpo-altura: 1.5;
-  --texto-tabela-tamanho: .875rem;
+  --texto-tabela-tamanho: .8125rem;
   --texto-tabela-peso: 400;
   --texto-tabela-altura: 1.4;
-  --texto-rotulo-tamanho: .875rem;
+  --texto-rotulo-tamanho: .75rem;
   --texto-rotulo-peso: 500;
   --texto-rotulo-altura: 1.4;
-  --texto-botao-tamanho: .875rem;
+  --texto-botao-tamanho: .8125rem;
   --texto-botao-peso: 600;
   --texto-botao-altura: 1.25;
   --texto-legenda-tamanho: .75rem;
   --texto-legenda-peso: 400;
   --texto-legenda-altura: 1.4;
-  --texto-kpi-tamanho: 1.625rem;
+  --texto-kpi-tamanho: 1.5rem;
   --texto-kpi-peso: 700;
   --texto-kpi-altura: 1.1;
   --espaco-4: .25rem;
@@ -46,25 +46,26 @@
   --espaco-24: 1.5rem;
   --espaco-32: 2rem;
   --espaco-48: 3rem;
-  --raio-6: 6px;
-  --raio-8: 8px;
-  --sombra-card: 0 1px 2px rgba(26, 26, 26, .12);
+  --raio-6: 3px;
+  --raio-8: 4px;
+  --sombra-card: none;
   --alvo-44: 44px;
   --altura-controle: 44px;
   --espaco-controle-y: .5rem;
   --espaco-conteudo-x: 1rem;
-  --espaco-secao: 1rem;
-  --padding-card: 1rem;
+  --espaco-secao: .75rem;
+  --padding-card: .75rem;
   --borda-1: 1px solid var(--cor-borda);
   --foco-anel: 2px solid var(--cor-texto);
-  --altura-cabecalho: 64px;
-  --largura-menu: 260px;
+  --altura-cabecalho: 56px;
+  --largura-menu: 248px;
 }
 @media (min-width: 768px) {
-  :root { --altura-controle: 38px; --espaco-controle-y: .375rem; --espaco-conteudo-x: 1.5rem; }
+  :root { --altura-controle: 32px; --espaco-controle-y: .25rem; --espaco-conteudo-x: 1.25rem; }
 }
 @media (min-width: 1024px) {
-  :root { --largura-menu: 212px; }
+  /* Menu estreito das referências: cerca de 1/6 da composição útil de 1024 px. */
+  :root { --largura-menu: 160px; }
 }
 @media (pointer: coarse) {
   :root { --altura-controle: 44px; }

@@ -1,0 +1,1862 @@
+{
+  "results": [
+    {
+      "name": "login",
+      "width": 375,
+      "height": 812,
+      "page": "/login",
+      "viewport": 375,
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "outside": [],
+      "header": null,
+      "menu": null,
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "login",
+      "width": 768,
+      "height": 1024,
+      "page": "/login",
+      "viewport": 768,
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "outside": [],
+      "header": null,
+      "menu": null,
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "login",
+      "width": 1024,
+      "height": 768,
+      "page": "/login",
+      "viewport": 1024,
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "outside": [],
+      "header": null,
+      "menu": null,
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "login",
+      "width": 1366,
+      "height": 768,
+      "page": "/login",
+      "viewport": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "outside": [],
+      "header": null,
+      "menu": null,
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "login",
+      "width": 1440,
+      "height": 900,
+      "page": "/login",
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "outside": [],
+      "header": null,
+      "menu": null,
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "login",
+      "width": 1920,
+      "height": 1080,
+      "page": "/login",
+      "viewport": 1920,
+      "scrollWidth": 1920,
+      "clientWidth": 1920,
+      "outside": [],
+      "header": null,
+      "menu": null,
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "cadastro",
+      "width": 375,
+      "height": 812,
+      "page": "/cadastro",
+      "viewport": 375,
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "outside": [],
+      "header": null,
+      "menu": null,
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "cadastro",
+      "width": 768,
+      "height": 1024,
+      "page": "/cadastro",
+      "viewport": 768,
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "outside": [],
+      "header": null,
+      "menu": null,
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "cadastro",
+      "width": 1024,
+      "height": 768,
+      "page": "/cadastro",
+      "viewport": 1024,
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "outside": [],
+      "header": null,
+      "menu": null,
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "cadastro",
+      "width": 1366,
+      "height": 768,
+      "page": "/cadastro",
+      "viewport": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "outside": [],
+      "header": null,
+      "menu": null,
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "cadastro",
+      "width": 1440,
+      "height": 900,
+      "page": "/cadastro",
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "outside": [],
+      "header": null,
+      "menu": null,
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "cadastro",
+      "width": 1920,
+      "height": 1080,
+      "page": "/cadastro",
+      "viewport": 1920,
+      "scrollWidth": 1920,
+      "clientWidth": 1920,
+      "outside": [],
+      "header": null,
+      "menu": null,
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "cadastro-validacao",
+      "width": 375,
+      "height": 812,
+      "page": "/cadastro",
+      "viewport": 375,
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "outside": [],
+      "header": null,
+      "menu": null,
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "dashboard-vazio",
+      "width": 375,
+      "height": 812,
+      "page": "/dashboard",
+      "viewport": 375,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "outside": [],
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 360,
+        "height": 115
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "kpi": {
+        "x": 16,
+        "y": 131,
+        "width": 328,
+        "height": 74.390625
+      },
+      "kpiColumns": "328px"
+    },
+    {
+      "name": "dashboard-vazio",
+      "width": 768,
+      "height": 1024,
+      "page": "/dashboard",
+      "viewport": 768,
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "outside": [],
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 768,
+        "height": 61
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "kpi": {
+        "x": 20,
+        "y": 85,
+        "width": 358,
+        "height": 74.390625
+      },
+      "kpiColumns": "358px 358px"
+    },
+    {
+      "name": "dashboard-vazio",
+      "width": 1024,
+      "height": 768,
+      "page": "/dashboard",
+      "viewport": 1024,
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 864,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 768
+      },
+      "kpi": {
+        "x": 180,
+        "y": 80,
+        "width": 197,
+        "height": 74.390625
+      },
+      "kpiColumns": "197px 197px 197px 197px"
+    },
+    {
+      "name": "dashboard-vazio",
+      "width": 1366,
+      "height": 768,
+      "page": "/dashboard",
+      "viewport": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1206,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 768
+      },
+      "kpi": {
+        "x": 223,
+        "y": 80,
+        "width": 261,
+        "height": 74.390625
+      },
+      "kpiColumns": "261px 261px 261px 261px"
+    },
+    {
+      "name": "dashboard-vazio",
+      "width": 1440,
+      "height": 900,
+      "page": "/dashboard",
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1280,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 900
+      },
+      "kpi": {
+        "x": 260,
+        "y": 80,
+        "width": 261,
+        "height": 74.390625
+      },
+      "kpiColumns": "261px 261px 261px 261px"
+    },
+    {
+      "name": "dashboard-vazio",
+      "width": 1920,
+      "height": 1080,
+      "page": "/dashboard",
+      "viewport": 1920,
+      "scrollWidth": 1920,
+      "clientWidth": 1920,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1760,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 1080
+      },
+      "kpi": {
+        "x": 500,
+        "y": 80,
+        "width": 261,
+        "height": 74.390625
+      },
+      "kpiColumns": "261px 261px 261px 261px"
+    },
+    {
+      "name": "estoque-vazio",
+      "width": 375,
+      "height": 812,
+      "page": "/estoque",
+      "viewport": 375,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "outside": [],
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 360,
+        "height": 61
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "kpi": {
+        "x": 16,
+        "y": 77,
+        "width": 328,
+        "height": 74.390625
+      },
+      "kpiColumns": null
+    },
+    {
+      "name": "estoque-vazio",
+      "width": 768,
+      "height": 1024,
+      "page": "/estoque",
+      "viewport": 768,
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "outside": [],
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 768,
+        "height": 61
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "kpi": {
+        "x": 20,
+        "y": 85,
+        "width": 358,
+        "height": 74.390625
+      },
+      "kpiColumns": null
+    },
+    {
+      "name": "estoque-vazio",
+      "width": 1024,
+      "height": 768,
+      "page": "/estoque",
+      "viewport": 1024,
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 864,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 768
+      },
+      "kpi": {
+        "x": 180,
+        "y": 80,
+        "width": 197,
+        "height": 74.390625
+      },
+      "kpiColumns": null
+    },
+    {
+      "name": "estoque-vazio",
+      "width": 1366,
+      "height": 768,
+      "page": "/estoque",
+      "viewport": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1206,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 768
+      },
+      "kpi": {
+        "x": 180,
+        "y": 80,
+        "width": 282.5,
+        "height": 74.390625
+      },
+      "kpiColumns": null
+    },
+    {
+      "name": "estoque-vazio",
+      "width": 1440,
+      "height": 900,
+      "page": "/estoque",
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1280,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 900
+      },
+      "kpi": {
+        "x": 200,
+        "y": 80,
+        "width": 291,
+        "height": 74.390625
+      },
+      "kpiColumns": null
+    },
+    {
+      "name": "estoque-vazio",
+      "width": 1920,
+      "height": 1080,
+      "page": "/estoque",
+      "viewport": 1920,
+      "scrollWidth": 1920,
+      "clientWidth": 1920,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1760,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 1080
+      },
+      "kpi": {
+        "x": 440,
+        "y": 80,
+        "width": 291,
+        "height": 74.390625
+      },
+      "kpiColumns": null
+    },
+    {
+      "name": "estoque-selecionado",
+      "width": 375,
+      "height": 812,
+      "page": "/estoque",
+      "viewport": 375,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "outside": [],
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 360,
+        "height": 61
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "kpi": {
+        "x": 16,
+        "y": 77,
+        "width": 328,
+        "height": 74.390625
+      },
+      "kpiColumns": null
+    },
+    {
+      "name": "estoque-selecionado",
+      "width": 768,
+      "height": 1024,
+      "page": "/estoque",
+      "viewport": 768,
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "outside": [],
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 768,
+        "height": 61
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "kpi": {
+        "x": 20,
+        "y": 85,
+        "width": 358,
+        "height": 74.390625
+      },
+      "kpiColumns": null
+    },
+    {
+      "name": "estoque-selecionado",
+      "width": 1024,
+      "height": 768,
+      "page": "/estoque",
+      "viewport": 1024,
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 864,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 768
+      },
+      "kpi": {
+        "x": 180,
+        "y": 80,
+        "width": 197,
+        "height": 74.390625
+      },
+      "kpiColumns": null
+    },
+    {
+      "name": "estoque-selecionado",
+      "width": 1366,
+      "height": 768,
+      "page": "/estoque",
+      "viewport": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1206,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 768
+      },
+      "kpi": {
+        "x": 180,
+        "y": 80,
+        "width": 282.5,
+        "height": 74.390625
+      },
+      "kpiColumns": null
+    },
+    {
+      "name": "estoque-selecionado",
+      "width": 1440,
+      "height": 900,
+      "page": "/estoque",
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1280,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 900
+      },
+      "kpi": {
+        "x": 200,
+        "y": 80,
+        "width": 291,
+        "height": 74.390625
+      },
+      "kpiColumns": null
+    },
+    {
+      "name": "estoque-selecionado",
+      "width": 1920,
+      "height": 1080,
+      "page": "/estoque",
+      "viewport": 1920,
+      "scrollWidth": 1920,
+      "clientWidth": 1920,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1760,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 1080
+      },
+      "kpi": {
+        "x": 440,
+        "y": 80,
+        "width": 291,
+        "height": 74.390625
+      },
+      "kpiColumns": null
+    },
+    {
+      "name": "nova-venda-vazia",
+      "width": 375,
+      "height": 812,
+      "page": "/nova-venda",
+      "viewport": 375,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "outside": [],
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 360,
+        "height": 113
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "nova-venda-vazia",
+      "width": 768,
+      "height": 1024,
+      "page": "/nova-venda",
+      "viewport": 768,
+      "scrollWidth": 753,
+      "clientWidth": 753,
+      "outside": [],
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 753,
+        "height": 61
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "nova-venda-vazia",
+      "width": 1024,
+      "height": 768,
+      "page": "/nova-venda",
+      "viewport": 1024,
+      "scrollWidth": 1009,
+      "clientWidth": 1009,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 849,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 768
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "nova-venda-vazia",
+      "width": 1366,
+      "height": 768,
+      "page": "/nova-venda",
+      "viewport": 1366,
+      "scrollWidth": 1351,
+      "clientWidth": 1351,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1191,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 768
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "nova-venda-vazia",
+      "width": 1440,
+      "height": 900,
+      "page": "/nova-venda",
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1280,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 900
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "nova-venda-vazia",
+      "width": 1920,
+      "height": 1080,
+      "page": "/nova-venda",
+      "viewport": 1920,
+      "scrollWidth": 1920,
+      "clientWidth": 1920,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1760,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 1080
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "nova-venda-preenchida",
+      "width": 375,
+      "height": 812,
+      "page": "/nova-venda",
+      "viewport": 375,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "outside": [],
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 360,
+        "height": 113
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "nova-venda-preenchida",
+      "width": 768,
+      "height": 1024,
+      "page": "/nova-venda",
+      "viewport": 768,
+      "scrollWidth": 753,
+      "clientWidth": 753,
+      "outside": [],
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 753,
+        "height": 61
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "nova-venda-preenchida",
+      "width": 1024,
+      "height": 768,
+      "page": "/nova-venda",
+      "viewport": 1024,
+      "scrollWidth": 1009,
+      "clientWidth": 1009,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 849,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 768
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "nova-venda-preenchida",
+      "width": 1366,
+      "height": 768,
+      "page": "/nova-venda",
+      "viewport": 1366,
+      "scrollWidth": 1351,
+      "clientWidth": 1351,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1191,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 768
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "nova-venda-preenchida",
+      "width": 1440,
+      "height": 900,
+      "page": "/nova-venda",
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1280,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 900
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "nova-venda-preenchida",
+      "width": 1920,
+      "height": 1080,
+      "page": "/nova-venda",
+      "viewport": 1920,
+      "scrollWidth": 1920,
+      "clientWidth": 1920,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1760,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 1080
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "vendas-rascunho",
+      "width": 375,
+      "height": 812,
+      "page": "/vendas",
+      "viewport": 375,
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "outside": [],
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 375,
+        "height": 61
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "vendas-rascunho",
+      "width": 768,
+      "height": 1024,
+      "page": "/vendas",
+      "viewport": 768,
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "outside": [],
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 768,
+        "height": 61
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "vendas-rascunho",
+      "width": 1024,
+      "height": 768,
+      "page": "/vendas",
+      "viewport": 1024,
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 864,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 768
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "vendas-rascunho",
+      "width": 1366,
+      "height": 768,
+      "page": "/vendas",
+      "viewport": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1206,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 768
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "vendas-rascunho",
+      "width": 1440,
+      "height": 900,
+      "page": "/vendas",
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1280,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 900
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "vendas-rascunho",
+      "width": 1920,
+      "height": 1080,
+      "page": "/vendas",
+      "viewport": 1920,
+      "scrollWidth": 1920,
+      "clientWidth": 1920,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1760,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 1080
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "nova-venda-confirmacao",
+      "width": 1366,
+      "height": 768,
+      "page": "/nova-venda",
+      "viewport": 1366,
+      "scrollWidth": 1351,
+      "clientWidth": 1351,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1191,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 768
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "nova-venda-confirmacao",
+      "width": 375,
+      "height": 812,
+      "page": "/nova-venda",
+      "viewport": 375,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "outside": [],
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 360,
+        "height": 113
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "nova-venda-sucesso",
+      "width": 1366,
+      "height": 768,
+      "page": "/nova-venda",
+      "viewport": 1366,
+      "scrollWidth": 1351,
+      "clientWidth": 1351,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1191,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 768
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "vendas",
+      "width": 375,
+      "height": 812,
+      "page": "/vendas",
+      "viewport": 375,
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "outside": [],
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 375,
+        "height": 61
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "vendas",
+      "width": 768,
+      "height": 1024,
+      "page": "/vendas",
+      "viewport": 768,
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "outside": [],
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 768,
+        "height": 61
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "vendas",
+      "width": 1024,
+      "height": 768,
+      "page": "/vendas",
+      "viewport": 1024,
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 864,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 768
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "vendas",
+      "width": 1366,
+      "height": 768,
+      "page": "/vendas",
+      "viewport": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1206,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 768
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "vendas",
+      "width": 1440,
+      "height": 900,
+      "page": "/vendas",
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1280,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 900
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "vendas",
+      "width": 1920,
+      "height": 1080,
+      "page": "/vendas",
+      "viewport": 1920,
+      "scrollWidth": 1920,
+      "clientWidth": 1920,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1760,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 1080
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "vendas-detalhes",
+      "width": 375,
+      "height": 812,
+      "page": "/vendas",
+      "viewport": 375,
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "outside": [],
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 375,
+        "height": 61
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "dashboard-preenchido",
+      "width": 1366,
+      "height": 768,
+      "page": "/dashboard",
+      "viewport": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1206,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 768
+      },
+      "kpi": {
+        "x": 223,
+        "y": 80,
+        "width": 261,
+        "height": 74.390625
+      },
+      "kpiColumns": "261px 261px 261px 261px"
+    },
+    {
+      "name": "dashboard-tabela",
+      "width": 375,
+      "height": 812,
+      "page": "/dashboard",
+      "viewport": 375,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "outside": [],
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 360,
+        "height": 115
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "kpi": {
+        "x": 16,
+        "y": 131,
+        "width": 328,
+        "height": 74.390625
+      },
+      "kpiColumns": "328px"
+    },
+    {
+      "name": "perfil",
+      "width": 375,
+      "height": 812,
+      "page": "/perfil",
+      "viewport": 375,
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "outside": [],
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 375,
+        "height": 61
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "perfil",
+      "width": 768,
+      "height": 1024,
+      "page": "/perfil",
+      "viewport": 768,
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "outside": [],
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 768,
+        "height": 61
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "perfil",
+      "width": 1024,
+      "height": 768,
+      "page": "/perfil",
+      "viewport": 1024,
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 864,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 768
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "perfil",
+      "width": 1366,
+      "height": 768,
+      "page": "/perfil",
+      "viewport": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1206,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 768
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "perfil",
+      "width": 1440,
+      "height": 900,
+      "page": "/perfil",
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1280,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 900
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "perfil",
+      "width": 1920,
+      "height": 1080,
+      "page": "/perfil",
+      "viewport": 1920,
+      "scrollWidth": 1920,
+      "clientWidth": 1920,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1760,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 1080
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "perfil-menu",
+      "width": 1366,
+      "height": 768,
+      "page": "/perfil",
+      "viewport": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1206,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 768
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "perfil-menu",
+      "width": 375,
+      "height": 812,
+      "page": "/perfil",
+      "viewport": 375,
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "outside": [],
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 375,
+        "height": 61
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "menu-mobile",
+      "width": 375,
+      "height": 812,
+      "page": "/perfil",
+      "viewport": 375,
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "outside": [],
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 375,
+        "height": 61
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "usuarios",
+      "width": 375,
+      "height": 812,
+      "page": "/usuarios",
+      "viewport": 375,
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "outside": [],
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 375,
+        "height": 61
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "usuarios",
+      "width": 768,
+      "height": 1024,
+      "page": "/usuarios",
+      "viewport": 768,
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "outside": [],
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 768,
+        "height": 61
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "usuarios",
+      "width": 1024,
+      "height": 768,
+      "page": "/usuarios",
+      "viewport": 1024,
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 864,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 768
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "usuarios",
+      "width": 1366,
+      "height": 768,
+      "page": "/usuarios",
+      "viewport": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1206,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 768
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "usuarios",
+      "width": 1440,
+      "height": 900,
+      "page": "/usuarios",
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1280,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 900
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "usuarios",
+      "width": 1920,
+      "height": 1080,
+      "page": "/usuarios",
+      "viewport": 1920,
+      "scrollWidth": 1920,
+      "clientWidth": 1920,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1760,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 1080
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "usuarios-cadastro",
+      "width": 375,
+      "height": 812,
+      "page": "/usuarios",
+      "viewport": 375,
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "outside": [],
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 375,
+        "height": 61
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "kpi": null,
+      "kpiColumns": null
+    },
+    {
+      "name": "usuarios-edicao",
+      "width": 1366,
+      "height": 768,
+      "page": "/usuarios",
+      "viewport": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "outside": [],
+      "header": {
+        "x": 160,
+        "y": 0,
+        "width": 1206,
+        "height": 56
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 768
+      },
+      "kpi": null,
+      "kpiColumns": null
+    }
+  ],
+  "interactions": [
+    "Cadastro: validação obrigatória preservada",
+    "Login funcionario: aprovado",
+    "Filtro de período no cabeçalho: aprovado",
+    "Estoque: seleção, abas e pesquisa; Novo/Editar permanecem desabilitados",
+    "Nova venda: orçamento e limpeza confirmada sem efeitos colaterais",
+    "Rascunho: salvo, listado e retomado sem baixa de estoque",
+    "Venda mock: configurações, quantidades, desconto, confirmação e finalização única aprovados",
+    "Vendas: listagem e detalhes aprovados",
+    "Perfil: menu aberto/fechado por Escape; gaveta mobile aberta/fechada",
+    "Troca de sessão para gestor sem recarregar os mocks: aprovada",
+    "Gestor: acesso à Nova venda e ação de cadastro disponíveis",
+    "Financeiro: histórico preservado no Dashboard; rota independente removida",
+    "Usuários: pesquisa e abertura/fechamento dos modais de cadastro e edição"
+  ],
+  "exceptions": []
+}

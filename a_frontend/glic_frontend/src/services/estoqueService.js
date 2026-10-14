@@ -13,7 +13,10 @@ export async function obterProduto(id) {
 }
 export function aplicarBaixaEstoque(itens, vendaId) {
   const porProduto = new Map();
-  for (const item of itens) porProduto.set(item.produtoId, (porProduto.get(item.produtoId) || 0) + item.quantidade);
+  for (const item of itens) {
+    if (!Number.isSafeInteger(item.quantidade) || item.quantidade < 1) throw new Error("Quantidade inválida para baixa de estoque.");
+    porProduto.set(item.produtoId, (porProduto.get(item.produtoId) || 0) + item.quantidade);
+  }
   for (const [produtoId, quantidade] of porProduto) {
     const produto = produtosMock.find((p) => p.id === produtoId);
     if (!produto || produto.quantidade < quantidade) {
@@ -21,9 +24,9 @@ export function aplicarBaixaEstoque(itens, vendaId) {
       throw new Error(`Estoque insuficiente para ${nome}.`);
     }
   }
-  for (const item of itens) {
-    const produto = produtosMock.find((p) => p.id === item.produtoId);
-    produto.quantidade -= item.quantidade;
-    movimentacoesMock.push({ id: `mov-${Date.now()}-${item.produtoId}`, vendaId, produtoId: produto.id, produto: produto.nome, tipo: "Saída por venda", quantidade: item.quantidade, data: new Date().toISOString() });
+  for (const [produtoId, quantidade] of porProduto) {
+    const produto = produtosMock.find((p) => p.id === produtoId);
+    produto.quantidade -= quantidade;
+    movimentacoesMock.push({ id: `mov-${vendaId}-${produtoId}`, vendaId, produtoId: produto.id, produto: produto.nome, tipo: "Saída por venda", quantidade, data: new Date().toISOString() });
   }
 }

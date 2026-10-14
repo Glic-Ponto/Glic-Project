@@ -11,7 +11,6 @@ import Dashboard from "../pages/Dashboard/Dashboard";
 import Estoque from "../pages/Estoque/Estoque";
 import NovaVenda from "../pages/NovaVenda/NovaVenda";
 import Vendas from "../pages/Vendas/Vendas";
-import Financeiro from "../pages/Financeiro/Financeiro";
 import Usuarios from "../pages/Usuarios/Usuarios";
 
 function TelaPendente({ titulo }) {
@@ -36,7 +35,6 @@ export default function AppRoutes() {
         <Route path={rotas.novaVenda} element={<NovaVenda />} />
         <Route path={rotas.vendas} element={<Vendas />} />
         <Route path={rotas.estoque} element={<Estoque />} />
-        <Route path={rotas.financeiro} element={<Financeiro />} />
         <Route path={rotas.usuarios} element={<Usuarios />} />
         <Route path={rotas.perfil} element={<Perfil />} />
       </Route>

@@ -1,4 +1,7 @@
 .layout-autenticacao { min-height: 100dvh; display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr; }
-.layout-autenticacao__imagem { display: flex; align-items: center; justify-content: center; padding: var(--espaco-24); color: var(--cor-superficie); background: var(--cor-secundaria); font-size: var(--texto-h2-tamanho); font-weight: 700; text-align: center; }
-.layout-autenticacao__conteudo { min-width: 0; display: flex; align-items: center; background: var(--cor-fundo); }
-@media (min-width: 768px) { .layout-autenticacao { grid-template-columns: 32fr 68fr; grid-template-rows: auto; } .layout-autenticacao__imagem { font-size: var(--texto-h1-tamanho); } }
+.layout-autenticacao__imagem { display: flex; align-items: center; justify-content: center; padding: var(--espaco-24); color: var(--cor-superficie); background: var(--cor-secundaria); font-size: var(--texto-h1-tamanho); font-weight: 700; text-align: center; }
+.layout-autenticacao__conteudo { min-width: 0; background: var(--cor-fundo); }
+@media (min-width: 768px) {
+  .layout-autenticacao { grid-template-columns: 32fr 68fr; grid-template-rows: auto; }
+  .layout-autenticacao__imagem { align-items: flex-start; padding-top: clamp(72px, 14vh, 128px); }
+}

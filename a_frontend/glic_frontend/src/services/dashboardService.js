@@ -2,6 +2,7 @@ import { dashboardMock } from "../mocks/dashboard";
 import { vendasMock } from "../mocks/vendas";
 import { receitasMock, despesasMock } from "../mocks/financeiro";
 import { atrasoMock } from "./api";
+import { statusVenda } from "../constants/vendas";
 
 // TODO: substituir por chamada à API REST (Spring Boot)
 export async function obterResumoDashboard(periodo = "hoje") {
@@ -10,7 +11,7 @@ export async function obterResumoDashboard(periodo = "hoje") {
   const dias = periodo === "7dias" ? 7 : periodo === "30dias" ? 30 : periodo === "personalizado" ? 30 : 1;
   const vendasPeriodo = vendasMock.filter((venda) => {
     const data = new Date(venda.data);
-    return (agora - data) / 86400000 < dias;
+    return statusVenda(venda) === "finalizada" && (agora - data) / 86400000 < dias;
   });
   const faturamento = vendasPeriodo.reduce((total, venda) => total + venda.total, 0);
   const receitas = receitasMock.reduce((total, item) => total + item.valor, 0);
@@ -20,7 +21,7 @@ export async function obterResumoDashboard(periodo = "hoje") {
   vendasPeriodo.forEach((venda) => venda.itens.forEach((item) => {
     const categoria = item.categoria || "Acessórios";
     categorias.set(categoria, (categorias.get(categoria) || 0) + item.preco * item.quantidade);
-    const nome = item.nome || "Serviço";
+    const nome = item.configuracao?.servico || item.nome || "Serviço";
     servicos.set(nome, (servicos.get(nome) || 0) + item.quantidade);
   }));
   const faturamentoPorDia = Array.from({ length: 7 }, (_, indice) => {

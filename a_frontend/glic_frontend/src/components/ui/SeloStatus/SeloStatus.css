@@ -1,4 +1,4 @@
-.ui-selo { display: inline-flex; align-items: center; gap: var(--espaco-4); padding: var(--espaco-4) var(--espaco-8); border: 1px solid currentColor; border-radius: var(--raio-6); font-size: var(--texto-legenda-tamanho); line-height: 1.4; white-space: nowrap; }
+.ui-selo { display: inline-flex; align-items: center; gap: var(--espaco-4); padding: 1px 5px; border: 1px solid currentColor; border-radius: var(--raio-6); font-size: var(--texto-legenda-tamanho); line-height: 1.4; white-space: nowrap; }
 .ui-selo--alerta { color: var(--cor-alerta); }
 .ui-selo--erro { color: var(--cor-erro); }
 .ui-selo--sucesso { color: var(--cor-sucesso); }

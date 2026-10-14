@@ -82,7 +82,6 @@ export const textos = {
     semFornecedores: "Nenhum fornecedor cadastrado.",
     pagina: "Página"
   },
-  financeiro: { titulo: "Financeiro" },
   usuarios: { titulo: "Usuários" },
   perfil: {
     titulo: "Meu perfil",

@@ -11,12 +11,11 @@ const titulos = {
   "/nova-venda": textos.novaVenda.titulo,
   "/vendas": textos.vendas.titulo,
   "/estoque": textos.estoque.titulo,
-  "/financeiro": textos.financeiro.titulo,
   "/usuarios": textos.usuarios.titulo,
   "/perfil": textos.perfil.titulo
 };
 
-export default function Cabecalho() {
+export default function Cabecalho({ acoesRef }) {
   const [menuAberto, setMenuAberto] = useState(false);
   const location = useLocation();
   const titulo = titulos[location.pathname] || textos.dashboard.titulo;
@@ -24,7 +23,8 @@ export default function Cabecalho() {
     <>
       <header className="cabecalho">
         <button className="cabecalho__menu" type="button" aria-label={textos.comuns.abrirMenu} aria-expanded={menuAberto} onClick={() => setMenuAberto(true)}><Menu aria-hidden="true" /></button>
-        <h1 className="cabecalho__titulo">{titulo}</h1>
+        <h1 className="cabecalho__titulo" id="titulo-pagina">{titulo}</h1>
+        <div className="cabecalho__acoes" ref={acoesRef} />
         <MenuPerfil />
       </header>
       {menuAberto && <><button className="cabecalho__fundo" aria-label={textos.comuns.fecharMenu} onClick={() => setMenuAberto(false)} /><MenuLateral aberto onNavegar={() => setMenuAberto(false)} /></>}

@@ -1,0 +1,9 @@
+.dialogo-venda { position: fixed; inset: 0; margin: auto; width: min(480px, calc(100% - 32px)); max-height: calc(100dvh - 32px); overflow: auto; padding: 24px; background: var(--cor-superficie); color: var(--cor-texto); border: var(--borda-1); border-radius: var(--raio-8); }
+.dialogo-venda::backdrop { background: #0008; }
+.dialogo-venda h2 { font-size: var(--texto-h2-tamanho); padding-right: 32px; margin-bottom: 16px; }
+.dialogo-venda p { margin-block: 12px; }
+.dialogo-venda__fechar { position: absolute; right: 8px; top: 8px; min-width: var(--altura-controle); min-height: var(--altura-controle); border: 0; background: transparent; font-size: 1.5rem; }
+.dialogo-venda__acoes { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; margin-top: 16px; }
+.dialogo-venda__itens { list-style: none; padding: 0; margin: 16px 0; }
+.dialogo-venda__itens li { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding-block: 8px; border-bottom: var(--borda-1); }
+.dialogo-venda__itens small { display: block; color: var(--cor-texto-secundario); }

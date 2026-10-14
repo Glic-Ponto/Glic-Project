@@ -1,4 +1,6 @@
-.pagina-cadastro { width: 100%; max-width: 30rem; margin: auto; padding: var(--espaco-32) var(--espaco-conteudo-x); background: var(--cor-fundo); }
-.pagina-cadastro h1 { margin: 0; text-align: center; }
-.pagina-cadastro__formulario { display: grid; gap: var(--espaco-secao); width: 100%; margin: var(--espaco-24) auto 0; }
-.pagina-cadastro__formulario > .ui-botao, .pagina-cadastro__acao, .pagina-cadastro__acao .ui-botao { width: 100%; }
+.pagina-cadastro { width: 100%; max-width: 760px; margin: 0 auto; padding: clamp(32px, 8vh, 72px) var(--espaco-conteudo-x) var(--espaco-32); }
+.pagina-cadastro h1 { text-align: center; }
+.pagina-cadastro__formulario { display: grid; gap: var(--espaco-16); width: 100%; margin: var(--espaco-32) auto 0; }
+.pagina-cadastro__formulario > .ui-botao { justify-self: center; min-width: 176px; margin-top: var(--espaco-16); }
+@media (min-width: 768px) { .pagina-cadastro { padding-inline: var(--espaco-48); } }
+@media (max-width: 479px) { .pagina-cadastro__formulario > .ui-botao { width: 100%; } }

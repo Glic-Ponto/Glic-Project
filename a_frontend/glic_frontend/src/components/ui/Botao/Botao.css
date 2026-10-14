@@ -5,7 +5,7 @@
 .ui-botao--secundario:hover:not(:disabled), .ui-botao--secundario:active:not(:disabled) { background: var(--cor-secundaria-hover); }
 .ui-botao--terciario { background: transparent; color: var(--cor-texto); border-color: var(--cor-borda); }
 .ui-botao--terciario:hover:not(:disabled) { background: var(--cor-fundo); }
-.ui-botao--grande { min-height: max(40px, var(--altura-controle)); }
+.ui-botao--grande { min-height: max(34px, var(--altura-controle)); }
 .ui-botao:disabled { background: var(--cor-fundo); color: var(--cor-texto-secundario); border-color: var(--cor-borda); }
 .ui-botao__loader { animation: ui-girar 1s linear infinite; }
 @keyframes ui-girar { to { transform: rotate(360deg); } }

@@ -5,7 +5,6 @@ export const rotas = {
   novaVenda: "/nova-venda",
   vendas: "/vendas",
   estoque: "/estoque",
-  financeiro: "/financeiro",
   usuarios: "/usuarios",
   perfil: "/perfil"
 };
