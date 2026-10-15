@@ -24,6 +24,12 @@ const formularioInicial = { nome: "", categoria: "", marca: "", quantidade: "", 
 const tiposImagem = ["image/jpeg", "image/png", "image/webp"];
 const tamanhoMaximoImagem = 5 * 1024 * 1024;
 const paraFormulario = (produto) => ({ nome: produto.nome, categoria: produto.categoria, marca: produto.marca, quantidade: String(produto.quantidade), preco: String(produto.preco), minimo: String(produto.minimo), unidade: produto.unidade, imagem: produto.imagem || null });
+const normalizarFiltro = (valor) => valor.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("pt-BR");
+const opcoesFiltro = (produtos, campo) => {
+  const valores = new Map();
+  produtos.forEach(produto => { const valor = produto[campo]?.trim(); if (valor && !valores.has(normalizarFiltro(valor))) valores.set(normalizarFiltro(valor), valor); });
+  return [...valores.values()].sort((a, b) => a.localeCompare(b, "pt-BR"));
+};
 
 export default function Estoque() {
   const t = textos.estoque;
@@ -57,13 +63,17 @@ export default function Estoque() {
     return () => { ativo = false; };
   }, []);
 
-  const categorias = useMemo(() => [...new Set(produtos.map((p) => p.categoria))], [produtos]);
-  const marcas = useMemo(() => [...new Set(produtos.map((p) => p.marca))], [produtos]);
+  const categorias = useMemo(() => opcoesFiltro(produtos, "categoria"), [produtos]);
+  const marcas = useMemo(() => opcoesFiltro(produtos, "marca"), [produtos]);
+  useEffect(() => {
+    if (categoria && !categorias.includes(categoria)) setCategoria("");
+    if (marca && !marcas.includes(marca)) setMarca("");
+  }, [categorias, marcas, categoria, marca]);
   const filtrados = useMemo(() => produtos.filter((p) => {
     const q = busca.trim().toLocaleLowerCase("pt-BR");
     const estado = p.quantidade === 0 ? "sem-estoque" : p.quantidade <= p.minimo ? "baixo" : "disponivel";
     return (!q || `${p.nome} ${p.marca} ${p.categoria}`.toLocaleLowerCase("pt-BR").includes(q))
-      && (!categoria || p.categoria === categoria) && (!marca || p.marca === marca) && (!status || estado === status);
+      && (!categoria || normalizarFiltro(p.categoria) === normalizarFiltro(categoria)) && (!marca || normalizarFiltro(p.marca) === normalizarFiltro(marca)) && (!status || estado === status);
   }), [produtos, busca, categoria, marca, status]);
   const paginas = Math.max(1, Math.ceil(filtrados.length / itensPorPagina));
   const visiveis = filtrados.slice((pagina - 1) * itensPorPagina, pagina * itensPorPagina);
@@ -100,8 +110,10 @@ export default function Estoque() {
   function validarFormulario() {
     const erros = {};
     if (!formulario.nome.trim()) erros.nome = "Informe o nome do produto.";
-    if (!formulario.categoria) erros.categoria = "Selecione uma categoria.";
-    if (!formulario.marca) erros.marca = "Selecione uma marca.";
+    if (!formulario.categoria.trim()) erros.categoria = "Informe a categoria.";
+    else if (formulario.categoria.trim().length > 80) erros.categoria = "A categoria deve ter no máximo 80 caracteres.";
+    if (!formulario.marca.trim()) erros.marca = "Informe a marca.";
+    else if (formulario.marca.trim().length > 80) erros.marca = "A marca deve ter no máximo 80 caracteres.";
     if (!/^\d+$/.test(formulario.quantidade)) erros.quantidade = "Informe uma quantidade inteira não negativa.";
     if (formulario.preco === "" || !Number.isFinite(Number(formulario.preco)) || Number(formulario.preco) < 0) erros.preco = "Informe um preço não negativo.";
     if (!/^\d+$/.test(formulario.minimo)) erros.minimo = "Informe um estoque mínimo inteiro não negativo.";
@@ -180,8 +192,8 @@ export default function Estoque() {
         {errosFormulario.imagem && <p className="estoque__form-erro" role="alert">{errosFormulario.imagem}</p>}
         <div className="estoque__formulario-grade">
           <label>Nome do produto<input value={formulario.nome} onChange={e => alterarCampo("nome", e.target.value)} aria-invalid={Boolean(errosFormulario.nome)} />{errosFormulario.nome && <small>{errosFormulario.nome}</small>}</label>
-          <label>Categoria<select value={formulario.categoria} onChange={e => alterarCampo("categoria", e.target.value)} aria-invalid={Boolean(errosFormulario.categoria)}><option value="">Selecione</option>{categorias.map(item => <option key={item} value={item}>{item}</option>)}</select>{errosFormulario.categoria && <small>{errosFormulario.categoria}</small>}</label>
-          <label>Marca<select value={formulario.marca} onChange={e => alterarCampo("marca", e.target.value)} aria-invalid={Boolean(errosFormulario.marca)}><option value="">Selecione</option>{marcas.map(item => <option key={item} value={item}>{item}</option>)}</select>{errosFormulario.marca && <small>{errosFormulario.marca}</small>}</label>
+          <label>Categoria<input value={formulario.categoria} maxLength="80" placeholder="Digite a categoria do produto" onChange={e => alterarCampo("categoria", e.target.value)} aria-invalid={Boolean(errosFormulario.categoria)} />{errosFormulario.categoria && <small>{errosFormulario.categoria}</small>}</label>
+          <label>Marca<input value={formulario.marca} maxLength="80" placeholder="Digite a marca do produto" onChange={e => alterarCampo("marca", e.target.value)} aria-invalid={Boolean(errosFormulario.marca)} />{errosFormulario.marca && <small>{errosFormulario.marca}</small>}</label>
           <label>Quantidade<input inputMode="numeric" value={formulario.quantidade} onChange={e => alterarCampo("quantidade", e.target.value)} aria-invalid={Boolean(errosFormulario.quantidade)} />{errosFormulario.quantidade && <small>{errosFormulario.quantidade}</small>}</label>
           <label>Preço (R$)<input inputMode="decimal" value={formulario.preco} onChange={e => alterarCampo("preco", e.target.value.replace(",", "."))} aria-invalid={Boolean(errosFormulario.preco)} />{errosFormulario.preco && <small>{errosFormulario.preco}</small>}</label>
           <label>Estoque mínimo<input inputMode="numeric" value={formulario.minimo} onChange={e => alterarCampo("minimo", e.target.value)} aria-invalid={Boolean(errosFormulario.minimo)} />{errosFormulario.minimo && <small>{errosFormulario.minimo}</small>}</label>

@@ -1,6 +1,15 @@
 import { produtosMock, movimentacoesMock } from "../mocks/estoque";
 import { atrasoMock } from "./api";
 
+const chaveTexto = (valor) => valor.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("pt-BR");
+function textoProduto(valor, campo) {
+  const texto = typeof valor === "string" ? valor.trim() : "";
+  if (!texto) throw new Error(`Informe ${campo}.`);
+  if (texto.length > 80) throw new Error(`${campo} deve ter no máximo 80 caracteres.`);
+  const existente = produtosMock.find((produto) => chaveTexto(produto[campo]) === chaveTexto(texto));
+  return existente?.[campo] || texto;
+}
+
 export async function listarProdutos() {
   // TODO: substituir por chamada à API REST (Spring Boot)
   await atrasoMock();
@@ -33,14 +42,12 @@ export async function atualizarProduto(id, dados) {
 }
 function validarProduto(dados) {
   const nome = dados?.nome?.trim();
-  const categoria = dados?.categoria?.trim();
-  const marca = dados?.marca?.trim();
+  const categoria = textoProduto(dados?.categoria, "categoria");
+  const marca = textoProduto(dados?.marca, "marca");
   const quantidade = Number(dados?.quantidade);
   const preco = Number(dados?.preco);
   const minimo = Number(dados?.minimo);
-  if (!nome || !categoria || !marca) throw new Error("Preencha nome, categoria e marca.");
-  if (!produtosMock.some((produto) => produto.categoria === categoria)) throw new Error("Selecione uma categoria cadastrada.");
-  if (!produtosMock.some((produto) => produto.marca === marca)) throw new Error("Selecione uma marca cadastrada.");
+  if (!nome) throw new Error("Informe o nome do produto.");
   if (!Number.isSafeInteger(quantidade) || quantidade < 0) throw new Error("Informe uma quantidade inteira não negativa.");
   if (!Number.isFinite(preco) || preco < 0) throw new Error("Informe um preço válido.");
   if (!Number.isSafeInteger(minimo) || minimo < 0) throw new Error("Informe um estoque mínimo inteiro não negativo.");
