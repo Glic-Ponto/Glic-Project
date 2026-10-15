@@ -1,4 +1,5 @@
 .pagina-nova-venda { display: grid; gap: var(--espaco-secao); min-width: 0; max-width: 1120px; margin-inline: auto; }
+.nova-venda__acoes-cabecalho { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
 .nova-venda__grade { display: grid; gap: 16px; align-items: stretch; }
 .nova-venda__catalogo, .nova-venda__resumo { padding: 12px; background: var(--cor-secundaria); color: var(--cor-superficie); border: 1px solid #525252; border-radius: var(--raio-8); min-width: 0; }
 .nova-venda__secao { padding-block: 16px; border-bottom: 1px solid #525252; }

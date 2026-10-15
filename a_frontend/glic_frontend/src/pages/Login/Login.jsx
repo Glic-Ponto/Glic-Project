@@ -1,6 +1,6 @@
 /* TL01: painel escuro ocupa cerca de 32% da largura e traz o placeholder IMG centralizado. À direita, o título fica próximo ao topo, seguido pelos campos E-mail e Senha empilhados. O botão Entrar fica centralizado perto da base do painel de formulário. */
 import { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { rotas } from "../../constants/rotas";
 import { textos } from "../../constants/textos";
@@ -49,7 +49,7 @@ export default function Login() {
       {erroAutenticacao && <Alerta variante="erro">{erroAutenticacao}</Alerta>}
       <CampoTexto ref={emailRef} id="login-email" label={textos.login.email} tipo="email" valor={email} onChange={(evento) => setEmail(evento.target.value)} erro={erros.email} autoComplete="username" desabilitado={carregando} required />
       <CampoTexto ref={senhaRef} id="login-senha" label={textos.login.senha} tipo="password" valor={senha} onChange={(evento) => setSenha(evento.target.value)} erro={erros.senha} autoComplete="current-password" desabilitado={carregando} required />
-      <div className="pagina-login__acao"><Botao tipo="submit" tamanho="grande" desabilitado={carregando} carregando={carregando}>{textos.login.entrar}</Botao></div>
+      <div className="pagina-login__acao"><Botao tipo="submit" tamanho="grande" desabilitado={carregando} carregando={carregando}>{textos.login.entrar}</Botao><p className="pagina-login__cadastro">Não possui conta? <Link to={rotas.cadastro}>Cadastre-se agora</Link></p></div>
     </form>
   </section>;
 }

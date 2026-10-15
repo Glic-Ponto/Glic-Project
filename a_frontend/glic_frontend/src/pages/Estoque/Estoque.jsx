@@ -4,23 +4,30 @@
  * Em telas menores, o painel de detalhes passa a uma gaveta/tela sobre a lista.
  */
 import { useEffect, useMemo, useState } from "react";
-import { AlertCircle, Package, Search } from "lucide-react";
+import { AlertCircle, ImagePlus, Package, Plus, Search } from "lucide-react";
 import CartaoKpi from "../../components/ui/CartaoKpi/CartaoKpi";
 import SeloStatus from "../../components/ui/SeloStatus/SeloStatus";
 import Abas from "../../components/ui/Abas/Abas";
 import Paginacao from "../../components/ui/Paginacao/Paginacao";
 import EstadoVazio from "../../components/ui/EstadoVazio/EstadoVazio";
 import Botao from "../../components/ui/Botao/Botao";
-import { listarProdutos } from "../../services/estoqueService";
+import { atualizarProduto, cadastrarProduto, listarProdutos } from "../../services/estoqueService";
 import { movimentacoesMock } from "../../mocks/estoque";
+import { useAuth } from "../../contexts/AuthContext";
 import { textos } from "../../constants/textos";
+import DialogoVenda from "../../components/vendas/DialogoVenda";
 import "./Estoque.css";
 
 const moeda = (valor) => new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(valor || 0);
 const itensPorPagina = 5;
+const formularioInicial = { nome: "", categoria: "", marca: "", quantidade: "", preco: "", minimo: "", unidade: "un.", imagem: null };
+const tiposImagem = ["image/jpeg", "image/png", "image/webp"];
+const tamanhoMaximoImagem = 5 * 1024 * 1024;
+const paraFormulario = (produto) => ({ nome: produto.nome, categoria: produto.categoria, marca: produto.marca, quantidade: String(produto.quantidade), preco: String(produto.preco), minimo: String(produto.minimo), unidade: produto.unidade, imagem: produto.imagem || null });
 
 export default function Estoque() {
   const t = textos.estoque;
+  const { usuario } = useAuth();
   const [produtos, setProdutos] = useState([]);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState(false);
@@ -31,6 +38,14 @@ export default function Estoque() {
   const [selecionado, setSelecionado] = useState(null);
   const [aba, setAba] = useState("geral");
   const [pagina, setPagina] = useState(1);
+  const [modoFormulario, setModoFormulario] = useState(null);
+  const [formulario, setFormulario] = useState(formularioInicial);
+  const [formularioOriginal, setFormularioOriginal] = useState(formularioInicial);
+  const [errosFormulario, setErrosFormulario] = useState({});
+  const [salvandoProduto, setSalvandoProduto] = useState(false);
+  const [confirmarDescarte, setConfirmarDescarte] = useState(false);
+  const [sucesso, setSucesso] = useState("");
+  const podeCadastrar = ["Gestor", "Funcionário"].includes(usuario?.perfil);
 
   useEffect(() => {
     let ativo = true;
@@ -66,6 +81,54 @@ export default function Estoque() {
   function atualizarLista() {
     listarProdutos().then((dados) => setProdutos([...dados])).catch(() => setErro(true));
   }
+  const formularioAlterado = modoFormulario === "editar" && JSON.stringify(formulario) !== JSON.stringify(formularioOriginal);
+  function descartarFormulario() {
+    setModoFormulario(null); setFormulario(formularioInicial); setFormularioOriginal(formularioInicial); setErrosFormulario({}); setConfirmarDescarte(false);
+  }
+  function fecharFormulario() {
+    if (salvandoProduto) return;
+    if (formularioAlterado) { setConfirmarDescarte(true); return; }
+    descartarFormulario();
+  }
+  function abrirNovoProduto() { setSucesso(""); setFormulario(formularioInicial); setFormularioOriginal(formularioInicial); setModoFormulario("novo"); }
+  function abrirEditarProduto() {
+    if (!produtoAtual) return;
+    const dados = paraFormulario(produtoAtual);
+    setSucesso(""); setFormulario(dados); setFormularioOriginal(dados); setErrosFormulario({}); setModoFormulario("editar");
+  }
+  function alterarCampo(campo, valor) { setFormulario(atual => ({ ...atual, [campo]: valor })); setErrosFormulario(atual => ({ ...atual, [campo]: "", geral: "" })); }
+  function validarFormulario() {
+    const erros = {};
+    if (!formulario.nome.trim()) erros.nome = "Informe o nome do produto.";
+    if (!formulario.categoria) erros.categoria = "Selecione uma categoria.";
+    if (!formulario.marca) erros.marca = "Selecione uma marca.";
+    if (!/^\d+$/.test(formulario.quantidade)) erros.quantidade = "Informe uma quantidade inteira não negativa.";
+    if (formulario.preco === "" || !Number.isFinite(Number(formulario.preco)) || Number(formulario.preco) < 0) erros.preco = "Informe um preço não negativo.";
+    if (!/^\d+$/.test(formulario.minimo)) erros.minimo = "Informe um estoque mínimo inteiro não negativo.";
+    return erros;
+  }
+  function selecionarImagem(evento) {
+    const arquivo = evento.target.files?.[0];
+    if (!arquivo) return;
+    if (!tiposImagem.includes(arquivo.type)) { setErrosFormulario(atual => ({ ...atual, imagem: "Use uma imagem JPG, PNG ou WebP." })); evento.target.value = ""; return; }
+    if (arquivo.size > tamanhoMaximoImagem) { setErrosFormulario(atual => ({ ...atual, imagem: "A imagem deve ter no máximo 5 MB." })); evento.target.value = ""; return; }
+    alterarCampo("imagem", URL.createObjectURL(arquivo));
+  }
+  async function salvarProduto(evento) {
+    evento.preventDefault();
+    if (salvandoProduto) return;
+    const erros = validarFormulario();
+    if (Object.keys(erros).length) { setErrosFormulario(erros); return; }
+    setSalvandoProduto(true);
+    try {
+      const dadosFormulario = { ...formulario, quantidade: Number(formulario.quantidade), preco: Number(formulario.preco), minimo: Number(formulario.minimo) };
+      const produto = modoFormulario === "editar" ? await atualizarProduto(produtoAtual.id, dadosFormulario) : await cadastrarProduto(dadosFormulario);
+      const dados = await listarProdutos();
+      setProdutos([...dados]); setSelecionado(produto); setAba("geral"); setPagina(1); setBusca(""); setCategoria(""); setMarca(""); setStatus("");
+      descartarFormulario(); setSucesso(modoFormulario === "editar" ? "Produto atualizado com sucesso." : "Produto cadastrado com sucesso.");
+    } catch (e) { setErrosFormulario(atual => ({ ...atual, geral: e.message || "Não foi possível cadastrar o produto." })); }
+    finally { setSalvandoProduto(false); }
+  }
 
   return <section className="pagina-estoque" aria-labelledby="titulo-pagina">
     <div className="estoque__kpis">
@@ -74,7 +137,9 @@ export default function Estoque() {
       <CartaoKpi titulo={t.estoqueBaixo} valor={String(baixos)} carregando={carregando} />
       <CartaoKpi titulo={t.semEstoque} valor={String(semEstoque)} carregando={carregando} />
     </div>
+    {podeCadastrar && <div className="estoque__acoes-topo"><Botao variante="primario" className="estoque__novo" onClick={abrirNovoProduto}><Plus size={16} aria-hidden="true" />{t.novoProduto}</Botao></div>}
     {erro && <div className="estoque__erro" role="alert" aria-live="assertive"><AlertCircle aria-hidden="true" />{textos.comuns.erroConexao}</div>}
+    {sucesso && <div className="estoque__sucesso" role="status">{sucesso}</div>}
     <div className="estoque__corpo">
       <section className="estoque__lista" aria-label="Lista de produtos">
         <div className="estoque__filtros">
@@ -94,7 +159,7 @@ export default function Estoque() {
         <Paginacao pagina={pagina} totalPaginas={paginas} onChange={setPagina} />
       </section>
       <aside className={`estoque__detalhe ${produtoAtual ? "estoque__detalhe--aberto" : ""}`} aria-label="Detalhes do produto">
-        <div className="estoque__detalhe-topo"><Botao variante="secundario" tamanho="pequeno" onClick={() => setSelecionado(null)} className="estoque__voltar">{t.voltarLista}</Botao><Botao variante="primario" className="estoque__novo" desabilitado>{t.novoProduto}</Botao></div><div className="estoque__painel">
+        <div className="estoque__detalhe-topo"><Botao variante="secundario" tamanho="pequeno" onClick={() => setSelecionado(null)} className="estoque__voltar">{t.voltarLista}</Botao></div><div className="estoque__painel">
         {!produtoAtual ? <EstadoVazio icone={<Package aria-hidden="true" />} texto={t.selecionarProduto} /> : <>
           <div className="estoque__produto-resumo"><div className="estoque__produto-grande"><Package aria-hidden="true" /></div><div><h2>{produtoAtual.nome}</h2><p>{produtoAtual.marca}</p><strong>{moeda(produtoAtual.preco)}</strong><p>Quantidade: {produtoAtual.quantidade} {produtoAtual.unidade}</p><SeloStatus {...estadoProduto(produtoAtual)} /></div></div>
           <Abas abas={abas} ativa={aba} onChange={setAba} />
@@ -103,10 +168,27 @@ export default function Estoque() {
             {aba === "movimentacoes" && (movimentacoesMock.filter((m) => m.produtoId === produtoAtual.id).length ? <ul>{movimentacoesMock.filter((m) => m.produtoId === produtoAtual.id).map((m) => <li key={m.id}>{m.tipo}: {m.quantidade} · {new Date(m.data).toLocaleDateString("pt-BR")}</li>)}</ul> : <EstadoVazio texto={t.semMovimentacoes} />)}
             {aba === "fornecedores" && <EstadoVazio texto={t.semFornecedores} />}
           </div>
-          <div className="estoque__acoes"><Botao variante="secundario" desabilitado>{t.editarProduto}</Botao><Botao variante="secundario" onClick={() => setAba("movimentacoes")}>{t.historico}</Botao><Botao variante="secundario" onClick={atualizarLista}>Atualizar estoque</Botao></div>
+          <div className="estoque__acoes">{podeCadastrar && <Botao variante="secundario" onClick={abrirEditarProduto}>{t.editarProduto}</Botao>}<Botao variante="secundario" onClick={() => setAba("movimentacoes")}>{t.historico}</Botao><Botao variante="secundario" onClick={atualizarLista}>Atualizar estoque</Botao></div>
         </>}
         </div>
       </aside>
     </div>
+    {modoFormulario && <DialogoVenda titulo={confirmarDescarte ? "Descartar alterações?" : modoFormulario === "editar" ? "Editar produto" : "Novo produto"} onFechar={confirmarDescarte ? () => setConfirmarDescarte(false) : fecharFormulario} classe="estoque__dialogo-novo">
+      {confirmarDescarte ? <><p>As alterações não salvas serão perdidas.</p><div className="dialogo-venda__acoes"><Botao variante="secundario" onClick={() => setConfirmarDescarte(false)}>Continuar editando</Botao><Botao onClick={descartarFormulario}>Descartar alterações</Botao></div></> : <form className="estoque__formulario" onSubmit={salvarProduto} noValidate>
+        {errosFormulario.geral && <p className="estoque__form-erro" role="alert">{errosFormulario.geral}</p>}
+        <label className="estoque__imagem-campo"><span>Imagem do produto <small>(opcional, JPG, PNG ou WebP; até 5 MB)</small></span><input type="file" accept="image/jpeg,image/png,image/webp" onChange={selecionarImagem} />{formulario.imagem ? <img src={formulario.imagem} alt="Pré-visualização do produto" /> : <span className="estoque__imagem-vazia"><ImagePlus aria-hidden="true" />Sem imagem selecionada</span>}</label>
+        {errosFormulario.imagem && <p className="estoque__form-erro" role="alert">{errosFormulario.imagem}</p>}
+        <div className="estoque__formulario-grade">
+          <label>Nome do produto<input value={formulario.nome} onChange={e => alterarCampo("nome", e.target.value)} aria-invalid={Boolean(errosFormulario.nome)} />{errosFormulario.nome && <small>{errosFormulario.nome}</small>}</label>
+          <label>Categoria<select value={formulario.categoria} onChange={e => alterarCampo("categoria", e.target.value)} aria-invalid={Boolean(errosFormulario.categoria)}><option value="">Selecione</option>{categorias.map(item => <option key={item} value={item}>{item}</option>)}</select>{errosFormulario.categoria && <small>{errosFormulario.categoria}</small>}</label>
+          <label>Marca<select value={formulario.marca} onChange={e => alterarCampo("marca", e.target.value)} aria-invalid={Boolean(errosFormulario.marca)}><option value="">Selecione</option>{marcas.map(item => <option key={item} value={item}>{item}</option>)}</select>{errosFormulario.marca && <small>{errosFormulario.marca}</small>}</label>
+          <label>Quantidade<input inputMode="numeric" value={formulario.quantidade} onChange={e => alterarCampo("quantidade", e.target.value)} aria-invalid={Boolean(errosFormulario.quantidade)} />{errosFormulario.quantidade && <small>{errosFormulario.quantidade}</small>}</label>
+          <label>Preço (R$)<input inputMode="decimal" value={formulario.preco} onChange={e => alterarCampo("preco", e.target.value.replace(",", "."))} aria-invalid={Boolean(errosFormulario.preco)} />{errosFormulario.preco && <small>{errosFormulario.preco}</small>}</label>
+          <label>Estoque mínimo<input inputMode="numeric" value={formulario.minimo} onChange={e => alterarCampo("minimo", e.target.value)} aria-invalid={Boolean(errosFormulario.minimo)} />{errosFormulario.minimo && <small>{errosFormulario.minimo}</small>}</label>
+        </div>
+        <p className="estoque__unidade">Unidade de medida: un.</p>
+        <div className="dialogo-venda__acoes"><Botao variante="secundario" onClick={fecharFormulario} desabilitado={salvandoProduto}>Cancelar</Botao><Botao tipo="submit" carregando={salvandoProduto}>{modoFormulario === "editar" ? "Salvar alterações" : "Salvar produto"}</Botao></div>
+      </form>}
+    </DialogoVenda>}
   </section>;
 }

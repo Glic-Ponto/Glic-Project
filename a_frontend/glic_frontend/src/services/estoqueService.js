@@ -11,6 +11,42 @@ export async function obterProduto(id) {
   await atrasoMock();
   return produtosMock.find((produto) => produto.id === id) ?? null;
 }
+export async function cadastrarProduto(dados) {
+  const produto = validarProduto(dados);
+  await atrasoMock();
+  const novoProduto = { id: `p-${crypto.randomUUID()}`, ...produto };
+  produtosMock.push(novoProduto);
+  return novoProduto;
+}
+export async function atualizarProduto(id, dados) {
+  const indice = produtosMock.findIndex((produto) => produto.id === id);
+  if (indice === -1) throw new Error("Produto não encontrado.");
+  const produtoAtual = produtosMock[indice];
+  const produto = validarProduto(dados);
+  await atrasoMock();
+  produtosMock[indice] = { ...produtoAtual, ...produto, id: produtoAtual.id };
+  const diferencaQuantidade = produto.quantidade - produtoAtual.quantidade;
+  if (diferencaQuantidade !== 0) {
+    movimentacoesMock.push({ id: `mov-ajuste-${crypto.randomUUID()}`, produtoId: id, produto: produto.nome, tipo: "Ajuste de estoque", quantidade: diferencaQuantidade, data: new Date().toISOString() });
+  }
+  return produtosMock[indice];
+}
+function validarProduto(dados) {
+  const nome = dados?.nome?.trim();
+  const categoria = dados?.categoria?.trim();
+  const marca = dados?.marca?.trim();
+  const quantidade = Number(dados?.quantidade);
+  const preco = Number(dados?.preco);
+  const minimo = Number(dados?.minimo);
+  if (!nome || !categoria || !marca) throw new Error("Preencha nome, categoria e marca.");
+  if (!produtosMock.some((produto) => produto.categoria === categoria)) throw new Error("Selecione uma categoria cadastrada.");
+  if (!produtosMock.some((produto) => produto.marca === marca)) throw new Error("Selecione uma marca cadastrada.");
+  if (!Number.isSafeInteger(quantidade) || quantidade < 0) throw new Error("Informe uma quantidade inteira não negativa.");
+  if (!Number.isFinite(preco) || preco < 0) throw new Error("Informe um preço válido.");
+  if (!Number.isSafeInteger(minimo) || minimo < 0) throw new Error("Informe um estoque mínimo inteiro não negativo.");
+  if (!dados.unidade) throw new Error("Informe a unidade de medida.");
+  return { nome, categoria, marca, quantidade, preco, minimo, unidade: dados.unidade, imagem: dados.imagem || null };
+}
 export function aplicarBaixaEstoque(itens, vendaId) {
   const porProduto = new Map();
   for (const item of itens) {

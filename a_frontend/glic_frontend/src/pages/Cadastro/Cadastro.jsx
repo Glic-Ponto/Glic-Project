@@ -1,7 +1,9 @@
 /* TL08: painel escuro de imagem ocupa cerca de 32% da largura e contém IMG centralizado. No painel claro, o título Cadastro fica próximo ao topo e quatro campos aparecem empilhados em ordem. O botão Criar conta fica centralizado próximo à base; não há campo de perfil no wireframe. */
 import { useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { textos } from "../../constants/textos";
 import { useAuth } from "../../contexts/AuthContext";
+import { rotas } from "../../constants/rotas";
 import CampoTexto from "../../components/ui/CampoTexto/CampoTexto";
 import Botao from "../../components/ui/Botao/Botao";
 import Alerta from "../../components/ui/Alerta/Alerta";
@@ -63,7 +65,7 @@ export default function Cadastro() {
       <CampoTexto ref={refs.email} id="cadastro-email" label={textos.cadastro.email} tipo="email" valor={dados.email} onChange={(evento) => alterar("email", evento.target.value)} erro={erros.email} autoComplete="email" desabilitado={carregando} required />
       <CampoTexto ref={refs.senha} id="cadastro-senha" label={textos.cadastro.senha} tipo="password" valor={dados.senha} onChange={(evento) => alterar("senha", evento.target.value)} erro={erros.senha} autoComplete="new-password" desabilitado={carregando} required />
       <CampoTexto ref={refs.confirmarSenha} id="cadastro-confirmar-senha" label={textos.cadastro.confirmarSenha} tipo="password" valor={dados.confirmarSenha} onChange={(evento) => alterar("confirmarSenha", evento.target.value)} erro={erros.confirmarSenha} autoComplete="new-password" desabilitado={carregando} required />
-      <Botao tipo="submit" tamanho="grande" carregando={carregando} desabilitado={carregando}>{textos.cadastro.criarConta}</Botao>
+      <div className="pagina-cadastro__acao"><Botao tipo="submit" tamanho="grande" carregando={carregando} desabilitado={carregando}>{textos.cadastro.criarConta}</Botao><p className="pagina-cadastro__login">Já possui conta? <Link to={rotas.login}>Faça login</Link></p></div>
     </form>
   </section>;
 }

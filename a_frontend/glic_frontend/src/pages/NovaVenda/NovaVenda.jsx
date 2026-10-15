@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Check, Package, ShoppingBag, Trash2, Plus, Search } from "lucide-react";
 import { useAuth } from "../../contexts/AuthContext";
 import { listarProdutos } from "../../services/estoqueService";
@@ -18,6 +18,7 @@ const novoToken = () => crypto.randomUUID();
 
 export default function NovaVenda() {
   const { usuario } = useAuth();
+  const navegar = useNavigate();
   const [parametros] = useSearchParams();
   const idSolicitado = parametros.get("rascunho");
   const [produtos, setProdutos] = useState([]);
@@ -60,6 +61,12 @@ export default function NovaVenda() {
   const preenchida = carrinho.length > 0 || Object.values(configuracao).some(Boolean) || desconto !== "0";
   const disponiveis = produtos.filter(p => (p.nome + " " + p.marca + " " + p.categoria).toLocaleLowerCase("pt-BR").includes(busca.trim().toLocaleLowerCase("pt-BR")));
 
+  useEffect(() => {
+    const avisar = evento => { if (preenchida) { evento.preventDefault(); evento.returnValue = ""; } };
+    window.addEventListener("beforeunload", avisar);
+    return () => window.removeEventListener("beforeunload", avisar);
+  }, [preenchida]);
+
   function editar() { setErro(""); setAviso(""); }
   function adicionar(produto) {
     if (bloqueado) return;
@@ -82,6 +89,8 @@ export default function NovaVenda() {
     setCarrinho([]); setConfiguracao(configuracaoVazia()); setDesconto("0"); setRascunhoId(null);
     setConcluida(null); setModal(null); setBusca(""); editar(); operacao.current = novoToken();
   }
+  function solicitarSaida() { if (preenchida) setModal("sair"); else navegar(rotas.vendas); }
+  function sairSemSalvar() { setModal(null); navegar(rotas.vendas); }
   async function persistir(finalizar) {
     if (ocupado.current || concluida || carregando) return;
     ocupado.current = true; setSalvando(true); setModal(null); editar();
@@ -107,7 +116,7 @@ export default function NovaVenda() {
     </section>;
   }
   return <section className="pagina-nova-venda" aria-label="Nova venda">
-    <AcoesCabecalho><Botao variante="secundario" onClick={() => setModal("orcamento")} desabilitado={carregando}>Ver orçamento</Botao></AcoesCabecalho>
+    <AcoesCabecalho><div className="nova-venda__acoes-cabecalho"><Botao variante="terciario" onClick={solicitarSaida} desabilitado={salvando}>Voltar para Vendas</Botao><Botao variante="secundario" onClick={() => setModal("orcamento")} desabilitado={carregando}>Ver orçamento</Botao></div></AcoesCabecalho>
     {erro && <Alerta variante="erro">{erro}</Alerta>}
     {aviso && <Alerta>{aviso} <Link to={rotas.vendas}>Ver vendas</Link></Alerta>}
     {concluida && <Alerta variante="sucesso"><div className="nova-venda__sucesso"><div><strong>Venda {concluida.id} registrada com sucesso.</strong><p>Total: {moeda(concluida.total)}. Estoque atualizado e receita registrada no Dashboard.</p><p>{[...new Set(concluida.itens.map(i => i.produtoId))].map(id => { const p = produtos.find(p => p.id === id); return p ? p.nome + ": " + p.quantidade + " " + p.unidade + " disponíveis" : ""; }).join(" · ")}</p></div><nav aria-label="Após a venda"><Link to={rotas.estoque}>Estoque</Link><Link to={rotas.dashboard}>Dashboard</Link><Link to={rotas.vendas}>Vendas</Link></nav></div></Alerta>}
@@ -133,8 +142,8 @@ export default function NovaVenda() {
         <div className="nova-venda__acoes"><Botao variante="terciario" desabilitado={bloqueado || !preenchida || !descontoValido} onClick={() => persistir(false)}>Salvar</Botao><Botao desabilitado={bloqueado || !carrinho.length || !descontoValido} onClick={() => setModal("finalizar")}>{salvando ? "Salvando…" : concluida ? "Venda finalizada" : "Finalizar venda"}</Botao></div>
       </aside>
     </div>
-    {modal && <DialogoVenda classe={modal === "finalizar" ? "nova-venda__confirmacao" : ""} titulo={modal === "limpar" ? "Limpar venda?" : modal === "finalizar" ? "Confirmar venda?" : "Orçamento da venda"} onFechar={() => setModal(null)}>
-      {modal === "limpar" ? <><p>Descartar os itens e as seleções desta tela? O estoque e o financeiro não serão alterados.{rascunhoId && " O rascunho já salvo continuará no histórico."}</p><div className="dialogo-venda__acoes"><Botao variante="secundario" onClick={() => setModal(null)}>Continuar editando</Botao><Botao onClick={limpar}>Confirmar limpeza</Botao></div></> : <>
+    {modal && <DialogoVenda classe={modal === "finalizar" ? "nova-venda__confirmacao" : ""} titulo={modal === "limpar" ? "Limpar venda?" : modal === "finalizar" ? "Confirmar venda?" : modal === "sair" ? "Sair da nova venda?" : "Orçamento da venda"} onFechar={() => setModal(null)}>
+      {modal === "limpar" ? <><p>Descartar os itens e as seleções desta tela? O estoque e o financeiro não serão alterados.{rascunhoId && " O rascunho já salvo continuará no histórico."}</p><div className="dialogo-venda__acoes"><Botao variante="secundario" onClick={() => setModal(null)}>Continuar editando</Botao><Botao onClick={limpar}>Confirmar limpeza</Botao></div></> : modal === "sair" ? <><p>Há alterações não salvas. Ao sair, os itens e seleções desta tela serão perdidos. O estoque e o financeiro não serão alterados.</p><div className="dialogo-venda__acoes"><Botao variante="secundario" onClick={() => setModal(null)}>Cancelar</Botao><Botao onClick={sairSemSalvar}>Sair sem salvar</Botao></div></> : <>
         {modal === "orcamento" && <><p>Configuração atual: {resumoConfig(configuracao) || "Não informada"}</p><ul className="dialogo-venda__itens">{carrinho.map(i => <li key={i.id}><span>{i.nome} × {i.quantidade}<small>{resumoConfig(i.configuracao)}</small></span><strong>{moeda(i.preco * i.quantidade)}</strong></li>)}</ul>{!carrinho.length && <p>Nenhum item selecionado.</p>}<p>Subtotal: {moeda(subtotal)} · Desconto: {descontoValido ? moeda(descontoNumero) : "Inválido"}</p></>}
         <p>Total: <strong>{total === null ? "Revise o desconto" : moeda(total)}</strong>.</p>
         <p>{modal === "finalizar" ? "Ao confirmar, o estoque será baixado e a receita será registrada no Dashboard." : "Sem cobrança adicional por serviço, tipo de veículo ou área. Cliente, veículo e pagamento: não informados."}</p>

@@ -21,7 +21,7 @@ export default function MenuLateral({ aberto = false, onNavegar }) {
   }
   return (
     <nav className={`menu-lateral ${aberto ? "menu-lateral--aberto" : ""}`} aria-label="Menu principal">
-      <div className="menu-lateral__marca">Oficina DSom</div>
+      <div className="menu-lateral__marca"><img src="/assets/logo-oficina-dsom.png" alt="Oficina DSom" /></div>
       <div className="menu-lateral__links">
         {itens.map(({ to, label, Icon }) => (
           <NavLink key={to} to={to} onClick={onNavegar} className={({ isActive }) => `menu-lateral__item${isActive ? " menu-lateral__item--ativo" : ""}`}>

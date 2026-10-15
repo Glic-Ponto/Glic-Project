@@ -1,45 +1,72 @@
-import { dashboardMock } from "../mocks/dashboard";
 import { vendasMock } from "../mocks/vendas";
 import { receitasMock, despesasMock } from "../mocks/financeiro";
 import { atrasoMock } from "./api";
 import { statusVenda } from "../constants/vendas";
 
-// TODO: substituir por chamada à API REST (Spring Boot)
-export async function obterResumoDashboard(periodo = "hoje") {
+// Fuso provisório: usa o horário local do ambiente até a empresa defini-lo no back-end.
+const inicioDia = (data) => new Date(data.getFullYear(), data.getMonth(), data.getDate());
+const fimDia = (data) => new Date(data.getFullYear(), data.getMonth(), data.getDate(), 23, 59, 59, 999);
+const dataChave = (data) => `${data.getFullYear()}-${String(data.getMonth() + 1).padStart(2, "0")}-${String(data.getDate()).padStart(2, "0")}`;
+const dataLocal = (valor) => {
+  const [ano, mes, dia] = (valor || "").split("-").map(Number);
+  return Number.isInteger(ano) && Number.isInteger(mes) && Number.isInteger(dia) ? new Date(ano, mes - 1, dia) : null;
+};
+const noIntervalo = (valor, inicio, fim) => {
+  const data = new Date(valor);
+  return !Number.isNaN(data.getTime()) && data >= inicio && data <= fim;
+};
+const somar = (itens) => itens.reduce((total, item) => total + (Number(item.valor) || 0), 0);
+
+export function obterIntervaloDashboard(periodo, personalizado, agora = new Date()) {
+  if (periodo === "personalizado") {
+    const inicio = dataLocal(personalizado?.inicio);
+    const fim = dataLocal(personalizado?.fim);
+    if (!inicio || !fim || fim < inicio) throw new Error("Informe um período personalizado válido.");
+    return { inicio: inicioDia(inicio), fim: fimDia(fim), porHora: dataChave(inicio) === dataChave(fim) };
+  }
+  const dias = periodo === "30dias" ? 30 : periodo === "7dias" ? 7 : 1;
+  const inicio = inicioDia(agora);
+  inicio.setDate(inicio.getDate() - (dias - 1));
+  return { inicio, fim: fimDia(agora), porHora: dias === 1 };
+}
+
+function criarSerie(intervalo) {
+  if (intervalo.porHora) return Array.from({ length: 24 }, (_, hora) => ({ nome: `${String(hora).padStart(2, "0")}:00`, rotuloCompleto: `${dataChave(intervalo.inicio)} ${String(hora).padStart(2, "0")}:00`, valor: 0 }));
+  const pontos = [];
+  for (let data = inicioDia(intervalo.inicio); data <= intervalo.fim; data.setDate(data.getDate() + 1)) {
+    const copia = new Date(data);
+    pontos.push({ nome: copia.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" }), rotuloCompleto: copia.toLocaleDateString("pt-BR", { dateStyle: "full" }), valor: 0, chave: dataChave(copia) });
+  }
+  return pontos;
+}
+
+export async function obterResumoDashboard(periodo = "hoje", personalizado) {
   await atrasoMock();
-  const agora = new Date();
-  const dias = periodo === "7dias" ? 7 : periodo === "30dias" ? 30 : periodo === "personalizado" ? 30 : 1;
-  const vendasPeriodo = vendasMock.filter((venda) => {
+  const intervalo = obterIntervaloDashboard(periodo, personalizado);
+  const vendas = vendasMock.filter((venda) => statusVenda(venda) === "finalizada" && noIntervalo(venda.data, intervalo.inicio, intervalo.fim));
+  const faturamento = vendas.reduce((total, venda) => total + (Number(venda.total) || 0), 0);
+  const faturamentoPorDia = criarSerie(intervalo);
+  const categorias = new Map();
+  const servicos = new Map();
+  vendas.forEach((venda) => {
     const data = new Date(venda.data);
-    return statusVenda(venda) === "finalizada" && (agora - data) / 86400000 < dias;
+    const ponto = intervalo.porHora ? faturamentoPorDia[data.getHours()] : faturamentoPorDia.find((item) => item.chave === dataChave(data));
+    if (ponto) ponto.valor += Number(venda.total) || 0;
+    (venda.itens || []).forEach((item) => {
+      const valor = (Number(item.preco) || 0) * (Number(item.quantidade) || 0);
+      const categoria = item.categoria || "Sem categoria";
+      const servico = item.configuracao?.servico || item.nome || "Serviço não informado";
+      categorias.set(categoria, (categorias.get(categoria) || 0) + valor);
+      servicos.set(servico, (servicos.get(servico) || 0) + (Number(item.quantidade) || 0));
+    });
   });
-  const faturamento = vendasPeriodo.reduce((total, venda) => total + venda.total, 0);
-  const receitas = receitasMock.reduce((total, item) => total + item.valor, 0);
-  const despesas = despesasMock.reduce((total, item) => total + item.valor, 0);
-  const categorias = new Map(dashboardMock.faturamentoPorCategoria.map((item) => [item.nome, 0]));
-  const servicos = new Map(dashboardMock.servicosMaisVendidos.map((item) => [item.nome, 0]));
-  vendasPeriodo.forEach((venda) => venda.itens.forEach((item) => {
-    const categoria = item.categoria || "Acessórios";
-    categorias.set(categoria, (categorias.get(categoria) || 0) + item.preco * item.quantidade);
-    const nome = item.configuracao?.servico || item.nome || "Serviço";
-    servicos.set(nome, (servicos.get(nome) || 0) + item.quantidade);
-  }));
-  const faturamentoPorDia = Array.from({ length: 7 }, (_, indice) => {
-    const data = new Date(agora);
-    data.setDate(agora.getDate() - (6 - indice));
-    const total = vendasPeriodo.filter((v) => new Date(v.data).toDateString() === data.toDateString()).reduce((s, v) => s + v.total, 0);
-    return { nome: data.toLocaleDateString("pt-BR", { weekday: "short" }).replace(".", ""), valor: total };
-  });
+  const receitas = somar(receitasMock.filter((item) => noIntervalo(item.data, intervalo.inicio, intervalo.fim)));
+  const despesas = somar(despesasMock.filter((item) => noIntervalo(item.data, intervalo.inicio, intervalo.fim)));
   return {
-    faturamento,
-    vendas: vendasPeriodo.length,
-    ticketMedio: vendasPeriodo.length ? faturamento / vendasPeriodo.length : 0,
-    descontos: vendasPeriodo.reduce((total, venda) => total + (venda.desconto || 0), 0),
-    despesas,
-    receitas,
-    resultado: receitas - despesas,
+    intervalo, faturamento, vendas: vendas.length, ticketMedio: vendas.length ? faturamento / vendas.length : 0,
+    descontos: vendas.reduce((total, venda) => total + (Number(venda.desconto) || 0), 0), receitas, despesas, resultado: receitas - despesas,
     faturamentoPorDia,
-    faturamentoPorCategoria: Array.from(categorias, ([nome, valor]) => ({ nome, valor })),
-    servicosMaisVendidos: Array.from(servicos, ([nome, quantidade], i) => ({ id: `${nome}-${i}`, nome, quantidade })).sort((a, b) => b.quantidade - a.quantidade).slice(0, 5)
+    faturamentoPorCategoria: Array.from(categorias, ([nome, valor]) => ({ nome, valor })).sort((a, b) => b.valor - a.valor),
+    servicosMaisVendidos: Array.from(servicos, ([nome, quantidade], indice) => ({ id: `${nome}-${indice}`, nome, quantidade })).sort((a, b) => b.quantidade - a.quantidade).slice(0, 5)
   };
 }
