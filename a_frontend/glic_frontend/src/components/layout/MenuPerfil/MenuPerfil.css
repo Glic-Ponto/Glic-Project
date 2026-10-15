@@ -11,3 +11,11 @@
 .menu-perfil__painel a:hover, .menu-perfil__painel button:hover { background: var(--cor-secundaria-hover); }
 .menu-perfil__painel :focus-visible { outline-color: var(--cor-superficie); }
 @media (max-width: 767px) { .menu-perfil__painel { position: fixed; top: auto; right: var(--espaco-8); bottom: var(--espaco-8); left: var(--espaco-8); width: auto; max-height: calc(100dvh - 32px); overflow-y: auto; } }
+.trocar-conta { width: min(520px, calc(100% - 24px)); }
+.trocar-conta__lista { display: grid; gap: var(--espaco-8); max-height: min(48dvh, 320px); padding: 0; margin: var(--espaco-16) 0; overflow: auto; list-style: none; }
+.trocar-conta__lista li { display: flex; align-items: center; justify-content: space-between; gap: var(--espaco-12); padding: var(--espaco-12); border: var(--borda-1); border-radius: var(--raio-6); }
+.trocar-conta__lista li > div { display: grid; min-width: 0; gap: var(--espaco-4); }
+.trocar-conta__lista strong, .trocar-conta__lista span, .trocar-conta__senha span { overflow-wrap: anywhere; }
+.trocar-conta__lista span, .trocar-conta__senha span, .trocar-conta__vazio, .trocar-conta__atual { color: var(--cor-texto-secundario); font-size: var(--texto-legenda-tamanho); }
+.trocar-conta__lista .ui-botao { flex-shrink: 0; }
+.trocar-conta__senha { display: grid; gap: var(--espaco-12); }

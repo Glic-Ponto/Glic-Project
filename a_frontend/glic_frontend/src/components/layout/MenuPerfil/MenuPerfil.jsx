@@ -1,17 +1,18 @@
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, UserRound, KeyRound, ArrowLeftRight } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { ChevronDown, UserRound, ArrowLeftRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../../contexts/AuthContext";
 import { rotas } from "../../../constants/rotas";
 import { textos } from "../../../constants/textos";
 import Avatar from "../../ui/Avatar/Avatar";
+import TrocarContaModal from "./TrocarContaModal";
 import "./MenuPerfil.css";
 
 export default function MenuPerfil() {
-  const { usuario, sair } = useAuth();
+  const { usuario } = useAuth();
   const [aberto, setAberto] = useState(false);
+  const [trocaAberta, setTrocaAberta] = useState(false);
   const ref = useRef(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     function fechar(evento) {
@@ -27,14 +28,8 @@ export default function MenuPerfil() {
   }, []);
 
   function trocarConta() {
-    sair();
     setAberto(false);
-    navigate(rotas.login);
-  }
-
-  function irParaSeguranca() {
-    setAberto(false);
-    navigate(`${rotas.perfil}#seguranca`);
+    setTrocaAberta(true);
   }
 
   return (
@@ -46,8 +41,8 @@ export default function MenuPerfil() {
         <div className="menu-perfil__usuario"><Avatar nome={usuario?.nome || ""} src={usuario?.foto} tamanho="pequeno" /><div><strong>{usuario?.nome || ""}</strong><span>{usuario?.perfil || ""}</span></div></div>
         <Link role="menuitem" to={rotas.perfil} onClick={() => setAberto(false)}><UserRound size={18} aria-hidden="true" />{textos.comuns.perfil}</Link>
         <button role="menuitem" type="button" onClick={trocarConta}><ArrowLeftRight size={18} aria-hidden="true" />{textos.comuns.trocarConta}</button>
-        <button role="menuitem" type="button" onClick={irParaSeguranca}><KeyRound size={18} aria-hidden="true" />{textos.comuns.trocarSenha}</button>
       </div>}
+      {trocaAberta && <TrocarContaModal onFechar={() => setTrocaAberta(false)} />}
     </div>
   );
 }

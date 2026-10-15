@@ -16,6 +16,10 @@ export function AuthProvider({ children }) {
     return usuario;
   }
 
+  async function trocarConta(email, senha) {
+    return entrar(email, senha);
+  }
+
   async function cadastrar(dados) {
     return registrarUsuario(dados);
   }
@@ -40,6 +44,7 @@ export function AuthProvider({ children }) {
     usuario: sessao?.usuario ?? null,
     token: sessao?.token ?? null,
     entrar,
+    trocarConta,
     cadastrar,
     atualizarPerfil,
     alterarSenha,

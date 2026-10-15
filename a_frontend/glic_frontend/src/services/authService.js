@@ -10,6 +10,7 @@ export async function autenticar(email, senha) {
   await atrasoMock();
   const usuario = usuariosMock.find((item) => item.email.toLowerCase() === email.trim().toLowerCase() && item.senha === senha);
   if (!usuario) throw new Error("E-mail ou senha incorretos. Confira os dados e tente novamente.");
+  if (usuario.ativo === false) throw new Error("Esta conta está inativa e não pode ser acessada.");
   return usuarioSeguro(usuario);
 }
 
