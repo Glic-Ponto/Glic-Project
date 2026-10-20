@@ -10,7 +10,7 @@ export const textos = {
     abrirMenu: "Abrir menu principal",
     fecharMenu: "Fechar menu principal",
     carregando: "[texto a definir]",
-    erroConexao: "[texto a definir]",
+    erroConexao: "Não foi possível carregar os indicadores do Dashboard. Verifique se o servidor back-end está em execução.",
     listaSemUsuarios: "[texto a definir]",
     semPermissao: "[texto a definir]",
     campoObrigatorio: "[texto a definir]",
@@ -46,7 +46,7 @@ export const textos = {
     receitas: "Receitas (R$)",
     despesas: "Despesas (R$)",
     resultado: "Resultado (R$)",
-    erroConexao: "[texto a definir]",
+    erroConexao: "Não foi possível carregar os indicadores do Dashboard. Verifique se o servidor back-end está em execução.",
     dadosGrafico: "Consultar dados em tabela"
   },
   novaVenda: {

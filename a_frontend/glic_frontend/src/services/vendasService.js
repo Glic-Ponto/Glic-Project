@@ -1,7 +1,7 @@
 import { vendasMock } from "../mocks/vendas";
 import { produtosMock, movimentacoesMock } from "../mocks/estoque";
 import { receitasMock } from "../mocks/financeiro";
-import { atrasoMock } from "./api";
+import { atrasoMock, requisicao } from "./api";
 import { aplicarBaixaEstoque } from "./estoqueService";
 import { registrarReceitaVenda } from "./financeiroService";
 import { tiposServico, tiposVeiculo, areasAplicacao, statusVenda } from "../constants/vendas";
@@ -31,7 +31,6 @@ function preparar(itens, desconto, configuracao, rascunho) {
     if (!produto || !Number.isSafeInteger(quantidade) || quantidade < 1 || item.preco === "" || item.preco == null || !Number.isFinite(preco) || preco < 0 || !Number.isSafeInteger(centavos(preco) * quantidade)) {
       throw new Error("A venda contém produto, quantidade ou preço inválido.");
     }
-    // Um único catálogo; nenhuma cobrança adicional por serviço ou área.
     if (centavos(preco) !== centavos(produto.preco)) throw new Error("Confira o preço atual de " + produto.nome + " antes de continuar.");
     return { id: item.id || "item-" + indice, produtoId: produto.id, nome: produto.nome, categoria: produto.categoria, unidade: produto.unidade, quantidade, preco: centavos(preco) / 100, total: centavos(preco) * quantidade / 100, configuracao: configurar(item.configuracao) };
   });
@@ -78,8 +77,6 @@ export async function salvarRascunho(dados, usuario) {
 export async function registrarVenda(itens, usuario, desconto = 0, opcoes = {}) {
   validarUsuario(usuario);
   const chave = chaveOperacao(opcoes.operacaoId, usuario);
-  // Após a espera, validação e commit são síncronos. Uma chamada concorrente
-  // encontra o resultado pronto antes de tentar aplicar os efeitos novamente.
   await atrasoMock();
   if (operacoes.has(chave)) return copiar(operacoes.get(chave));
   const existente = encontrar(opcoes.rascunhoId, usuario) || vendasMock.find(v => v.operacaoId === opcoes.operacaoId && v.usuarioId === usuario.id);
@@ -94,6 +91,31 @@ export async function registrarVenda(itens, usuario, desconto = 0, opcoes = {}) 
     if (existente) vendasMock[vendasMock.indexOf(existente)] = venda;
     else vendasMock.push(venda);
     operacoes.set(chave, copiar(venda));
+
+    requisicao("/vendas", {
+      method: "POST",
+      body: JSON.stringify({
+        codigo: venda.id,
+        status: "finalizada",
+        desconto: venda.desconto,
+        usuarioId: venda.usuarioId,
+        usuarioNome: venda.usuarioNome,
+        cliente: venda.cliente,
+        veiculo: venda.veiculo,
+        pagamento: venda.pagamento,
+        itens: venda.itens.map(i => ({
+          produtoId: i.produtoId,
+          nome: i.nome,
+          categoria: i.categoria,
+          servico: i.configuracao?.servico || "",
+          tipoVeiculo: i.configuracao?.tipoVeiculo || "",
+          area: i.configuracao?.area || "",
+          quantidade: i.quantidade,
+          preco: i.preco
+        }))
+      })
+    }).catch(() => {});
+
     return copiar(venda);
   } catch (erro) {
     produtosMock.forEach((p, i) => { p.quantidade = quantidades[i]; });
