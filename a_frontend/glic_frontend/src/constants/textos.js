@@ -79,7 +79,7 @@ export const textos = {
     selecionarProduto: "Selecione um produto para ver os detalhes.",
     voltarLista: "Voltar à lista",
     semMovimentacoes: "Nenhuma movimentação encontrada.",
-    semFornecedores: "Nenhum fornecedor cadastrado.",
+    semFornecedores: "Nenhum fornecedor cadastrado para este produto.",
     pagina: "Página"
   },
   usuarios: { titulo: "Usuários" },

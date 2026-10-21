@@ -1,0 +1,19 @@
+.pagina-comprovante { min-height: 100dvh; padding: 24px 16px 48px; background: var(--cor-fundo); }
+.pagina-comprovante__acoes { display: flex; justify-content: space-between; align-items: center; gap: 12px; width: min(100%, 920px); margin: 0 auto 20px; }
+.pagina-comprovante__voltar { display: inline-flex; align-items: center; gap: 6px; min-height: var(--altura-controle); color: var(--cor-primaria-escura); font-weight: 600; text-decoration: none; }
+.pagina-comprovante__estado, .pagina-comprovante__erro { width: min(100%, 920px); margin: 40px auto; }
+.pagina-comprovante__erro { display: grid; justify-items: start; gap: 16px; }
+.pagina-comprovante > .comprovante { max-width: 920px; margin: 0 auto; }
+
+@media (max-width: 520px) {
+  .pagina-comprovante { padding-inline: 10px; }
+  .pagina-comprovante__acoes { align-items: stretch; flex-direction: column-reverse; }
+  .pagina-comprovante__acoes .ui-botao { width: 100%; }
+}
+
+@media print {
+  .pagina-comprovante { min-height: 0; padding: 0; background: #fff; }
+  .pagina-comprovante__acoes, .pagina-comprovante__estado, .pagina-comprovante__erro { display: none !important; }
+  .pagina-comprovante:not(.pagina-comprovante--pronta) { display: none; }
+  .pagina-comprovante > .comprovante { max-width: none; margin: 0; }
+}

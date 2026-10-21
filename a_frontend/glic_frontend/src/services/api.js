@@ -5,7 +5,11 @@ export async function requisicao(caminho, opcoes = {}) {
     ...opcoes,
     headers: { "Content-Type": "application/json", ...opcoes.headers }
   });
-  if (!resposta.ok) throw new Error(`HTTP ${resposta.status}`);
+  if (!resposta.ok) {
+    const erro = new Error(`HTTP ${resposta.status}`);
+    erro.status = resposta.status;
+    throw erro;
+  }
   if (resposta.status === 204) return null;
   return resposta.json();
 }

@@ -2,6 +2,19 @@
 import assert from "node:assert/strict";
 import { createServer } from "vite";
 const server = await createServer({ server: { middlewareMode: true }, appType: "custom" });
+const fetchOriginal = globalThis.fetch;
+let estadoTeste = null;
+globalThis.fetch = async (url) => {
+  if (String(url).includes("/dashboard/resumo")) {
+    const finalizadas = estadoTeste.vendas.filter(venda => (venda.status || "finalizada") === "finalizada");
+    const faturamento = finalizadas.reduce((soma, venda) => soma + venda.total, 0);
+    const descontos = finalizadas.reduce((soma, venda) => soma + (venda.desconto || 0), 0);
+    const receitas = estadoTeste.receitas.reduce((soma, receita) => soma + receita.valor, 0);
+    const despesas = estadoTeste.despesas.reduce((soma, despesa) => soma + despesa.valor, 0);
+    return new Response(JSON.stringify({ faturamento, vendas: finalizadas.length, ticketMedio: finalizadas.length ? faturamento / finalizadas.length : 0, descontos, receitas, despesas, resultado: receitas - despesas }), { status: 200, headers: { "Content-Type": "application/json" } });
+  }
+  return new Response(JSON.stringify({}), { status: 201, headers: { "Content-Type": "application/json" } });
+};
 let verificacoes = 0;
 try {
   const vendas = await server.ssrLoadModule("/src/services/vendasService.js");
@@ -9,7 +22,8 @@ try {
   const { registrarReceitaVenda } = await server.ssrLoadModule("/src/services/financeiroService.js");
   const { produtosMock, movimentacoesMock } = await server.ssrLoadModule("/src/mocks/estoque.js");
   const { vendasMock } = await server.ssrLoadModule("/src/mocks/vendas.js");
-  const { receitasMock } = await server.ssrLoadModule("/src/mocks/financeiro.js");
+  const { receitasMock, despesasMock } = await server.ssrLoadModule("/src/mocks/financeiro.js");
+  estadoTeste = { vendas: vendasMock, receitas: receitasMock, despesas: despesasMock };
   const usuario = { id: "teste-funcionario", nome: "Funcionário mock de teste", perfil: "Funcionário" };
   const configuracao = { servico: "Instalação de insulfilm", tipoVeiculo: "Tipo A", area: "Área A" };
   const produto = produtosMock[0];
@@ -84,4 +98,4 @@ try {
   await assert.rejects(vendas.registrarVenda([item], { ...gestor, perfil: "Visitante" }, 0, { operacaoId: "visitante" }), /funcionários e gestores/);
   await assert.rejects(vendas.obterRascunho("V-0100", { ...usuario, id: "outro" }), /outro funcionário/); verificacoes++;
   console.log("Aprovado: " + verificacoes + " cenários de serviço (rascunhos, idempotência, estoque, receita, rollback, valores inválidos, permissões e legado).");
-} finally { await server.close(); }
+} finally { globalThis.fetch = fetchOriginal; await server.close(); }

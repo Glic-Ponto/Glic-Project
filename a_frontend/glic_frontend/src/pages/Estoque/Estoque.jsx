@@ -20,10 +20,10 @@ import "./Estoque.css";
 
 const moeda = (valor) => new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(valor || 0);
 const itensPorPagina = 5;
-const formularioInicial = { nome: "", categoria: "", marca: "", quantidade: "", preco: "", minimo: "", unidade: "un.", imagem: null };
+const formularioInicial = { nome: "", categoria: "", marca: "", fornecedor: "", quantidade: "", preco: "", minimo: "", unidade: "un.", imagem: null };
 const tiposImagem = ["image/jpeg", "image/png", "image/webp"];
 const tamanhoMaximoImagem = 5 * 1024 * 1024;
-const paraFormulario = (produto) => ({ nome: produto.nome, categoria: produto.categoria, marca: produto.marca, quantidade: String(produto.quantidade), preco: String(produto.preco), minimo: String(produto.minimo), unidade: produto.unidade, imagem: produto.imagem || null });
+const paraFormulario = (produto) => ({ nome: produto.nome, categoria: produto.categoria, marca: produto.marca, fornecedor: produto.fornecedor || "", quantidade: String(produto.quantidade), preco: String(produto.preco), minimo: String(produto.minimo), unidade: produto.unidade, imagem: produto.imagem || null });
 const normalizarFiltro = (valor) => valor.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("pt-BR");
 const opcoesFiltro = (produtos, campo) => {
   const valores = new Map();
@@ -88,9 +88,6 @@ export default function Estoque() {
     if (produto.quantidade <= produto.minimo) return { texto: "Estoque baixo", variante: "alerta" };
     return { texto: "Disponível", variante: "sucesso" };
   }
-  function atualizarLista() {
-    listarProdutos().then((dados) => setProdutos([...dados])).catch(() => setErro(true));
-  }
   const formularioAlterado = modoFormulario === "editar" && JSON.stringify(formulario) !== JSON.stringify(formularioOriginal);
   function descartarFormulario() {
     setModoFormulario(null); setFormulario(formularioInicial); setFormularioOriginal(formularioInicial); setErrosFormulario({}); setConfirmarDescarte(false);
@@ -114,6 +111,7 @@ export default function Estoque() {
     else if (formulario.categoria.trim().length > 80) erros.categoria = "A categoria deve ter no máximo 80 caracteres.";
     if (!formulario.marca.trim()) erros.marca = "Informe a marca.";
     else if (formulario.marca.trim().length > 80) erros.marca = "A marca deve ter no máximo 80 caracteres.";
+    if (formulario.fornecedor.trim().length > 100) erros.fornecedor = "O fornecedor deve ter no máximo 100 caracteres.";
     if (!/^\d+$/.test(formulario.quantidade)) erros.quantidade = "Informe uma quantidade inteira não negativa.";
     if (formulario.preco === "" || !Number.isFinite(Number(formulario.preco)) || Number(formulario.preco) < 0) erros.preco = "Informe um preço não negativo.";
     if (!/^\d+$/.test(formulario.minimo)) erros.minimo = "Informe um estoque mínimo inteiro não negativo.";
@@ -178,9 +176,9 @@ export default function Estoque() {
           <div className="estoque__aba-conteudo" role="tabpanel" id={`painel-${aba}`} aria-labelledby={`aba-${aba}`}>
             {aba === "geral" && <><h3>{t.detalhesProduto}</h3><dl><dt>Categoria</dt><dd>{produtoAtual.categoria}</dd><dt>Marca</dt><dd>{produtoAtual.marca}</dd><dt>Preço unitário</dt><dd>{moeda(produtoAtual.preco)}</dd><dt>Quantidade</dt><dd>{produtoAtual.quantidade} {produtoAtual.unidade}</dd><dt>Estoque mínimo</dt><dd>{produtoAtual.minimo} {produtoAtual.unidade}</dd></dl></>}
             {aba === "movimentacoes" && (movimentacoesMock.filter((m) => m.produtoId === produtoAtual.id).length ? <ul>{movimentacoesMock.filter((m) => m.produtoId === produtoAtual.id).map((m) => <li key={m.id}>{m.tipo}: {m.quantidade} · {new Date(m.data).toLocaleDateString("pt-BR")}</li>)}</ul> : <EstadoVazio texto={t.semMovimentacoes} />)}
-            {aba === "fornecedores" && <EstadoVazio texto={t.semFornecedores} />}
+            {aba === "fornecedores" && (produtoAtual.fornecedor?.trim() ? <section className="estoque__fornecedor"><h3>Fornecedor do produto</h3><p>{produtoAtual.fornecedor}</p></section> : <EstadoVazio texto={t.semFornecedores} />)}
           </div>
-          <div className="estoque__acoes">{podeCadastrar && <Botao variante="secundario" onClick={abrirEditarProduto}>{t.editarProduto}</Botao>}<Botao variante="secundario" onClick={() => setAba("movimentacoes")}>{t.historico}</Botao><Botao variante="secundario" onClick={atualizarLista}>Atualizar estoque</Botao></div>
+          <div className="estoque__acoes">{podeCadastrar && <Botao variante="secundario" onClick={abrirEditarProduto}>{t.editarProduto}</Botao>}</div>
         </>}
         </div>
       </aside>
@@ -194,11 +192,11 @@ export default function Estoque() {
           <label>Nome do produto<input value={formulario.nome} onChange={e => alterarCampo("nome", e.target.value)} aria-invalid={Boolean(errosFormulario.nome)} />{errosFormulario.nome && <small>{errosFormulario.nome}</small>}</label>
           <label>Categoria<input value={formulario.categoria} maxLength="80" placeholder="Digite a categoria do produto" onChange={e => alterarCampo("categoria", e.target.value)} aria-invalid={Boolean(errosFormulario.categoria)} />{errosFormulario.categoria && <small>{errosFormulario.categoria}</small>}</label>
           <label>Marca<input value={formulario.marca} maxLength="80" placeholder="Digite a marca do produto" onChange={e => alterarCampo("marca", e.target.value)} aria-invalid={Boolean(errosFormulario.marca)} />{errosFormulario.marca && <small>{errosFormulario.marca}</small>}</label>
+          <label>Fornecedor<input value={formulario.fornecedor} maxLength="100" placeholder="Digite o fornecedor do produto" onChange={e => alterarCampo("fornecedor", e.target.value)} aria-invalid={Boolean(errosFormulario.fornecedor)} />{errosFormulario.fornecedor && <small>{errosFormulario.fornecedor}</small>}</label>
           <label>Quantidade<input inputMode="numeric" value={formulario.quantidade} onChange={e => alterarCampo("quantidade", e.target.value)} aria-invalid={Boolean(errosFormulario.quantidade)} />{errosFormulario.quantidade && <small>{errosFormulario.quantidade}</small>}</label>
           <label>Preço (R$)<input inputMode="decimal" value={formulario.preco} onChange={e => alterarCampo("preco", e.target.value.replace(",", "."))} aria-invalid={Boolean(errosFormulario.preco)} />{errosFormulario.preco && <small>{errosFormulario.preco}</small>}</label>
           <label>Estoque mínimo<input inputMode="numeric" value={formulario.minimo} onChange={e => alterarCampo("minimo", e.target.value)} aria-invalid={Boolean(errosFormulario.minimo)} />{errosFormulario.minimo && <small>{errosFormulario.minimo}</small>}</label>
         </div>
-        <p className="estoque__unidade">Unidade de medida: un.</p>
         <div className="dialogo-venda__acoes"><Botao variante="secundario" onClick={fecharFormulario} desabilitado={salvandoProduto}>Cancelar</Botao><Botao tipo="submit" carregando={salvandoProduto}>{modoFormulario === "editar" ? "Salvar alterações" : "Salvar produto"}</Botao></div>
       </form>}
     </DialogoVenda>}

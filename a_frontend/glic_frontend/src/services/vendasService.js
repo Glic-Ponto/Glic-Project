@@ -55,6 +55,16 @@ export async function listarVendas() {
   await atrasoMock();
   return copiar([...vendasMock].sort((a, b) => new Date(b.data) - new Date(a.data)));
 }
+export async function obterVenda(id) {
+  await atrasoMock();
+  const venda = vendasMock.find(item => item.id === id);
+  if (!venda) {
+    const erro = new Error("Venda não encontrada.");
+    erro.codigo = "VENDA_NAO_ENCONTRADA";
+    throw erro;
+  }
+  return copiar(venda);
+}
 export async function obterRascunho(id, usuario) {
   validarUsuario(usuario);
   await atrasoMock();

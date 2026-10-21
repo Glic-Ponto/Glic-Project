@@ -42,6 +42,7 @@
 .estoque__aba-conteudo dl { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--espaco-8); margin: 0; font-size: var(--texto-legenda-tamanho); }
 .estoque__aba-conteudo dt { color: var(--cor-texto-secundario); }
 .estoque__aba-conteudo dd { margin: 0; text-align: right; overflow-wrap: anywhere; }
+.estoque__fornecedor p { overflow-wrap: anywhere; }
 .estoque__acoes { display: grid; gap: var(--espaco-4); margin-top: var(--espaco-12); }
 .estoque__acoes .ui-botao { padding-inline: var(--espaco-8); }
 .estoque__erro { display: flex; align-items: center; gap: var(--espaco-8); color: var(--cor-erro); }
@@ -55,7 +56,6 @@
 .estoque__imagem-campo img { width: 100%; max-height: 144px; object-fit: contain; border: var(--borda-1); border-radius: var(--raio-6); }
 .estoque__imagem-vazia { display: flex; align-items: center; justify-content: center; gap: var(--espaco-8); min-height: 88px; border: var(--borda-1); border-radius: var(--raio-6); color: var(--cor-texto-secundario); font-weight: 400; }
 .estoque__formulario-grade { display: grid; gap: var(--espaco-8); }
-.estoque__unidade { margin: 0; color: var(--cor-texto-secundario); font-size: var(--texto-legenda-tamanho); }
 .estoque__linhas-esqueleto { min-height: 20rem; background: var(--cor-fundo); }
 .estoque__sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 .estoque__painel button:focus-visible { outline-color: var(--cor-superficie); }

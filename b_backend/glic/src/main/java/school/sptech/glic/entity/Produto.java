@@ -5,10 +5,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "produto")
@@ -30,6 +32,13 @@ public class Produto {
     @Column(name = "categoria", length = 100, nullable = false)
     private String categoria;
 
+    @Column(name = "marca", length = 80)
+    private String marca;
+
+    @Size(max = 100)
+    @Column(name = "fornecedor", length = 100)
+    private String fornecedor;
+
     @NotNull
     @PositiveOrZero
     @Column(name = "preco_venda", nullable = false)
@@ -44,6 +53,13 @@ public class Produto {
     @PositiveOrZero
     @Column(name = "estoque_minimo", nullable = false)
     private Integer estoqueMinimo;
+
+    @Column(name = "unidade", length = 20)
+    private String unidade;
+
+    @Lob
+    @Column(name = "imagem")
+    private String imagem;
 
     @NotNull
     @Column(name = "ativo", nullable = false)
@@ -67,6 +83,33 @@ public class Produto {
         this.precoVenda = precoVenda;
         this.quantidadeEstoque = quantidadeEstoque;
         this.estoqueMinimo = estoqueMinimo;
+        this.unidade = "un.";
+        this.ativo = ativo;
+    }
+
+    public Produto(
+            String nome,
+            String descricao,
+            String categoria,
+            String marca,
+            String fornecedor,
+            Double precoVenda,
+            Integer quantidadeEstoque,
+            Integer estoqueMinimo,
+            String unidade,
+            String imagem,
+            Boolean ativo
+    ) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.categoria = categoria;
+        this.marca = marca;
+        this.fornecedor = fornecedor;
+        this.precoVenda = precoVenda;
+        this.quantidadeEstoque = quantidadeEstoque;
+        this.estoqueMinimo = estoqueMinimo;
+        this.unidade = unidade;
+        this.imagem = imagem;
         this.ativo = ativo;
     }
 
@@ -102,6 +145,22 @@ public class Produto {
         this.categoria = categoria;
     }
 
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String getFornecedor() {
+        return fornecedor;
+    }
+
+    public void setFornecedor(String fornecedor) {
+        this.fornecedor = fornecedor;
+    }
+
     public Double getPrecoVenda() {
         return precoVenda;
     }
@@ -124,6 +183,22 @@ public class Produto {
 
     public void setEstoqueMinimo(Integer estoqueMinimo) {
         this.estoqueMinimo = estoqueMinimo;
+    }
+
+    public String getUnidade() {
+        return unidade;
+    }
+
+    public void setUnidade(String unidade) {
+        this.unidade = unidade;
+    }
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 
     public Boolean getAtivo() {

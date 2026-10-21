@@ -1,0 +1,50 @@
+.comprovante { width: 100%; background: #fff; color: #1a1a1a; border: 1px solid #c4c4c4; border-radius: 8px; padding: 32px; overflow-wrap: anywhere; }
+.comprovante__cabecalho { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; padding-bottom: 20px; border-bottom: 2px solid #1a1a1a; }
+.comprovante__marca { display: flex; align-items: center; gap: 16px; min-width: 0; }
+.comprovante__marca img { display: block; width: 92px; max-height: 56px; object-fit: contain; }
+.comprovante__marca p { margin: 0 0 4px; color: #a8121a; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.comprovante__marca h1 { font-size: 1.35rem; }
+.comprovante__selo { flex-shrink: 0; padding: 8px 10px; border: 1px solid #8a8a8a; border-radius: 4px; font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; }
+.comprovante__metadados { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 24px; margin: 24px 0; }
+.comprovante__metadados div { display: grid; gap: 4px; min-width: 0; }
+.comprovante__metadados strong { font-size: .75rem; color: #525252; }
+.comprovante__codigo { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
+.comprovante__tabela { width: 100%; border-collapse: collapse; font-size: .8125rem; }
+.comprovante__tabela caption { padding-bottom: 10px; text-align: left; font-weight: 700; }
+.comprovante__tabela th, .comprovante__tabela td { padding: 11px 8px; border-bottom: 1px solid #d4d4d4; text-align: right; vertical-align: top; }
+.comprovante__tabela th:first-child, .comprovante__tabela td:first-child { width: 46%; text-align: left; }
+.comprovante__tabela td small { display: block; margin-top: 3px; color: #525252; font-weight: 400; }
+.comprovante__totais { width: min(100%, 380px); margin: 16px 0 24px auto; }
+.comprovante__totais p { display: flex; justify-content: space-between; gap: 16px; padding: 6px 0; }
+.comprovante__totais p > :last-child { flex-shrink: 0; white-space: nowrap; }
+.comprovante__total { margin-top: 6px; padding-top: 12px !important; border-top: 2px solid #1a1a1a; font-size: 1.05rem; }
+.comprovante__pagamento { padding: 16px; background: #f5f5f4; border-left: 4px solid #d71920; }
+.comprovante__pagamento h2 { margin-bottom: 6px; font-size: .875rem; }
+.comprovante__rodape { margin-top: 24px; padding-top: 16px; border-top: 1px solid #a3a3a3; font-size: .75rem; line-height: 1.55; }
+.comprovante__rodape p { margin-top: 4px; }
+
+@media screen and (max-width: 600px) {
+  .comprovante { padding: 18px; }
+  .comprovante__cabecalho, .comprovante__marca { align-items: flex-start; }
+  .comprovante__cabecalho { flex-direction: column; }
+  .comprovante__marca img { width: 72px; }
+  .comprovante__metadados { grid-template-columns: 1fr; }
+  .comprovante__tabela thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .comprovante__tabela tbody, .comprovante__tabela tr, .comprovante__tabela td { display: block; }
+  .comprovante__tabela tr { display: grid; grid-template-columns: .55fr 1fr 1fr; gap: 10px; padding: 14px 0; border-bottom: 1px solid #d4d4d4; }
+  .comprovante__tabela td { padding: 0; border: 0; text-align: left; white-space: nowrap; }
+  .comprovante__tabela td:first-child { grid-column: 1 / -1; width: auto; white-space: normal; }
+  .comprovante__tabela td[data-label]::before { content: attr(data-label); display: block; margin-bottom: 3px; color: #525252; font-size: .65rem; }
+}
+
+@page { size: A4 portrait; margin: 15mm; }
+@media print {
+  html, body, #root { min-width: 0; background: #fff !important; }
+  .comprovante { border: 0; border-radius: 0; padding: 0; color: #000; }
+  .comprovante__cabecalho { border-color: #000; }
+  .comprovante__pagamento { background: transparent; border: 1px solid #777; }
+  .comprovante__cabecalho, .comprovante__metadados div, .comprovante__tabela tr, .comprovante__totais, .comprovante__pagamento, .comprovante__rodape { break-inside: avoid; page-break-inside: avoid; }
+  .comprovante__tabela thead { display: table-header-group; }
+  .comprovante__tabela caption, .comprovante__pagamento h2 { break-after: avoid; page-break-after: avoid; }
+  .comprovante__tabela th, .comprovante__tabela td { color: #000; }
+}

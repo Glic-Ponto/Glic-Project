@@ -62,10 +62,10 @@ public class DataInitializer implements CommandLineRunner {
         usuarioRepository.saveAll(List.of(gestor, funcionario, admin));
 
         // 2. Popular tabela PRODUTO
-        Produto pelicula = new Produto("Película automotiva", "Instalação de insulfilm", "Películas", 180.0, 12, 3, true);
-        Produto multimidia = new Produto("Central multimídia", "Instalação de multimídia", "Multimídia", 890.0, 5, 2, true);
-        Produto cameraRe = new Produto("Câmera de ré", "Instalação de acessórios", "Acessórios", 220.0, 4, 3, true);
-        Produto sensor = new Produto("Sensor de estacionamento", "Instalação de acessórios", "Acessórios", 160.0, 6, 2, true);
+        Produto pelicula = new Produto("Película automotiva", "Instalação de insulfilm", "Películas", "Glic", "3M Auto Film", 180.0, 12, 3, "un.", null, true);
+        Produto multimidia = new Produto("Central multimídia", "Instalação de multimídia", "Multimídia", "Universal", "Pioneer Distribuidora", 890.0, 5, 2, "un.", null, true);
+        Produto cameraRe = new Produto("Câmera de ré", "Instalação de acessórios", "Acessórios", "Universal", "TechCar Acessórios", 220.0, 4, 3, "un.", null, true);
+        Produto sensor = new Produto("Sensor de estacionamento", "Instalação de acessórios", "Acessórios", "Universal", null, 160.0, 6, 2, "un.", null, true);
         produtoRepository.saveAll(List.of(pelicula, multimidia, cameraRe, sensor));
 
         // 3. Popular tabela ENTRADA_ESTOQUE

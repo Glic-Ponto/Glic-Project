@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-import { Search, Plus } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Printer, Search, Plus } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { listarVendas } from "../../services/vendasService";
 import { statusVenda } from "../../constants/vendas";
@@ -18,9 +18,11 @@ const statusTexto = v => statusVenda(v) === "rascunho" ? "Rascunho" : statusVend
 
 export default function Vendas() {
   const { usuario } = useAuth();
+  const location = useLocation();
+  const contextoAnterior = location.state?.contextoVendas;
   const [vendas, setVendas] = useState([]);
-  const [busca, setBusca] = useState("");
-  const [status, setStatus] = useState("");
+  const [busca, setBusca] = useState(() => contextoAnterior?.busca || "");
+  const [status, setStatus] = useState(() => contextoAnterior?.status || "");
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState("");
   const [selecionada, setSelecionada] = useState(null);
@@ -38,7 +40,7 @@ export default function Vendas() {
     { chave: "total", titulo: "Valor", render: v => <strong>{moeda(v.total)}</strong> },
     { chave: "pagamento", titulo: "Pagamento", render: v => informado(v.pagamento) },
     { chave: "status", titulo: "Status", render: v => <span className={"vendas__status vendas__status--" + statusVenda(v)}>{statusTexto(v)}</span> },
-    { chave: "acao", titulo: "Ações", render: v => <div className="vendas__acoes"><button className="vendas__detalhes-botao" onClick={() => setSelecionada(v)} type="button">Ver venda</button>{podeVender && v.usuarioId === usuario.id && statusVenda(v) === "rascunho" && <Link className="vendas__retomar" to={rotas.novaVenda + "?rascunho=" + encodeURIComponent(v.id)}>Retomar</Link>}</div> }
+    { chave: "acao", titulo: "Ações", render: v => <div className="vendas__acoes"><button className="vendas__detalhes-botao" onClick={() => setSelecionada(v)} type="button">Ver venda</button>{podeVender && v.usuarioId === usuario.id && statusVenda(v) === "rascunho" && <Link className="vendas__retomar" to={rotas.novaVenda + "?rascunho=" + encodeURIComponent(v.id)}>Retomar</Link>}{statusVenda(v) === "finalizada" && <Link className="vendas__comprovante" to={rotas.comprovanteVenda(v.id)} state={{ origemVendas: { busca, status } }} aria-label={`Imprimir comprovante da venda ${v.id}`}><Printer size={16} aria-hidden="true" />Imprimir comprovante</Link>}</div> }
   ];
   return <section className="pagina-vendas" aria-label="Vendas">
     <header className="vendas__cabecalho"><span className="vendas__resumo">{vendas.filter(v => statusVenda(v) === "finalizada").length} venda(s) finalizada(s) · {vendas.filter(v => statusVenda(v) === "rascunho").length} rascunho(s)</span>{podeVender && <Link className="ui-botao ui-botao--primario ui-botao--medio vendas__nova-venda" to={rotas.novaVenda}><Plus size={16} aria-hidden="true" />Nova venda</Link>}</header>
