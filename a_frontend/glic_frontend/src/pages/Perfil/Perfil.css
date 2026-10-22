@@ -1,7 +1,7 @@
 .pagina-perfil { min-width: 0; }
 .perfil-coluna { display: grid; gap: var(--espaco-16); width: 100%; max-width: 920px; margin: 0 auto; }
-.perfil-identificacao, .perfil-formularios { background: var(--cor-secundaria); color: var(--cor-superficie); border: 1px solid #525252; border-radius: var(--raio-8); }
-.perfil-identificacao { display: flex; align-items: center; flex-wrap: wrap; gap: var(--espaco-16); padding: var(--espaco-16); }
+.perfil-formularios { background: var(--cor-secundaria); color: var(--cor-superficie); border: 1px solid #525252; border-radius: var(--raio-8); }
+.perfil-identificacao { display: flex; align-items: center; flex-wrap: wrap; gap: var(--espaco-16); margin-bottom: var(--espaco-12); }
 .perfil-identificacao__dados { min-width: 0; flex: 1; }
 .perfil-identificacao__dados h2 { margin-bottom: var(--espaco-4); font-size: var(--texto-h3-tamanho); overflow-wrap: anywhere; }
 .perfil-identificacao__dados p { font-size: var(--texto-legenda-tamanho); }
@@ -11,12 +11,13 @@
 .perfil-identificacao__acoes .ui-botao:hover:not(:disabled) { background: var(--cor-secundaria-hover); }
 .perfil-identificacao__arquivo { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 .perfil-identificacao__arquivo:focus-visible + .ui-botao { outline: 2px solid var(--cor-superficie); }
-.perfil-formularios { padding: var(--espaco-12); }
+.perfil-formularios { padding: var(--espaco-16); }
 .perfil-grupo { min-width: 0; }
 .perfil-grupo + .perfil-grupo { margin-top: var(--espaco-12); padding-top: var(--espaco-8); border-top: 1px solid #525252; }
 .perfil-grupo__cabecalho { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--espaco-8); margin-bottom: var(--espaco-8); }
 .perfil-grupo__cabecalho h2 { font-size: var(--texto-h3-tamanho); }
 .perfil-grupo__campos { display: grid; gap: var(--espaco-12); }
+.perfil-grupo__acoes { display: flex; justify-content: flex-end; margin-top: var(--espaco-12); }
 .perfil-formularios .ui-campo label { color: var(--cor-superficie); }
 .perfil-formularios .ui-campo input { background: var(--cor-superficie); }
 .perfil-formularios .ui-alerta { margin-bottom: var(--espaco-12); }

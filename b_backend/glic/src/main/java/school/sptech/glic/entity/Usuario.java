@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -45,6 +46,10 @@ public class Usuario {
     @NotNull
     @Column(name = "data_criacao", nullable = false)
     private LocalDateTime dataCriacao;
+
+    @Lob
+    @Column(name = "foto")
+    private String foto; // imagem em base64 (data URL)
 
     public Usuario() {
     }
@@ -112,5 +117,13 @@ public class Usuario {
 
     public void setDataCriacao(LocalDateTime dataCriacao) {
         this.dataCriacao = dataCriacao;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 }

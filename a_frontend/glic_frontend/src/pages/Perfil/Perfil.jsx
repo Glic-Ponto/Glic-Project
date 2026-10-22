@@ -7,6 +7,7 @@ import Botao from "../../components/ui/Botao/Botao";
 import CampoTexto from "../../components/ui/CampoTexto/CampoTexto";
 import Alerta from "../../components/ui/Alerta/Alerta";
 import Avatar from "../../components/ui/Avatar/Avatar";
+import DialogoVenda from "../../components/vendas/DialogoVenda";
 import "./Perfil.css";
 
 export default function Perfil() {
@@ -23,6 +24,10 @@ export default function Perfil() {
   const [tipoSenha, setTipoSenha] = useState("sucesso");
   const [carregandoDados, setCarregandoDados] = useState(false);
   const [carregandoSenha, setCarregandoSenha] = useState(false);
+  const [mensagemFoto, setMensagemFoto] = useState("");
+  const [tipoFoto, setTipoFoto] = useState("sucesso");
+  const [confirmarRemocao, setConfirmarRemocao] = useState(false);
+  const [removendoFoto, setRemovendoFoto] = useState(false);
   const nomeRef = useRef(null);
   const emailRef = useRef(null);
   const senhaAtualRef = useRef(null);
@@ -114,41 +119,67 @@ export default function Perfil() {
   }
 
   function removerFoto() {
-    setFoto("");
-    if (inputFotoRef.current) inputFotoRef.current.value = "";
+    setConfirmarRemocao(true);
+  }
+
+  async function confirmarRemocaoFoto() {
+    setRemovendoFoto(true);
+    setMensagemFoto("");
+    try {
+      // Remove no backend mantendo o nome e o e-mail já salvos.
+      await atualizarPerfil({ nome: usuario?.nome || "", email: usuario?.email || "", foto: "" });
+      setFoto("");
+      if (inputFotoRef.current) inputFotoRef.current.value = "";
+      setTipoFoto("sucesso");
+      setMensagemFoto(textos.perfil.sucessoRemoverFoto);
+    } catch (erro) {
+      setTipoFoto("erro");
+      setMensagemFoto(erro.message || textos.comuns.erroConexao);
+    } finally {
+      setRemovendoFoto(false);
+      setConfirmarRemocao(false);
+    }
   }
 
   return <section className="pagina-perfil" aria-labelledby="perfil-identificacao-titulo">
     <div className="perfil-coluna">
-      <section className="perfil-identificacao" aria-labelledby="perfil-identificacao-titulo">
-        <Avatar nome={usuario?.nome || ""} src={foto} tamanho="grande" />
-        <div className="perfil-identificacao__dados"><h2 id="perfil-identificacao-titulo">{usuario?.nome || ""}</h2><p>{usuario?.perfil || ""}</p></div>
-        <div className="perfil-identificacao__acoes">
-          <input ref={inputFotoRef} className="perfil-identificacao__arquivo" id="perfil-foto" type="file" accept="image/*" onChange={selecionarFoto} aria-label={textos.perfil.alterarFoto} />
-          <Botao variante="secundario" onClick={() => inputFotoRef.current?.click()}>{textos.perfil.alterarFoto}</Botao>
-          <Botao variante="terciario" onClick={removerFoto}>{textos.perfil.removerFoto}</Botao>
-        </div>
-      </section>
-
       <section className="perfil-formularios" aria-label={textos.perfil.titulo}>
+        <div className="perfil-identificacao">
+          <Avatar nome={usuario?.nome || ""} src={foto} tamanho="grande" />
+          <div className="perfil-identificacao__dados"><h2 id="perfil-identificacao-titulo">{usuario?.nome || ""}</h2><p>{usuario?.perfil || ""}</p></div>
+          <div className="perfil-identificacao__acoes">
+            <input ref={inputFotoRef} className="perfil-identificacao__arquivo" id="perfil-foto" type="file" accept="image/*" onChange={selecionarFoto} aria-label={textos.perfil.alterarFoto} />
+            <Botao variante="secundario" onClick={() => inputFotoRef.current?.click()}>{textos.perfil.alterarFoto}</Botao>
+            <Botao variante="terciario" onClick={removerFoto} desabilitado={!foto || removendoFoto}>{textos.perfil.removerFoto}</Botao>
+          </div>
+        </div>
+        {mensagemFoto && <Alerta variante={tipoFoto}>{mensagemFoto}</Alerta>}
+
         <form className="perfil-grupo" onSubmit={salvarDados} noValidate aria-labelledby="perfil-pessoais-titulo">
-          <div className="perfil-grupo__cabecalho"><h2 id="perfil-pessoais-titulo">{textos.perfil.informacoesPessoais}</h2><Botao tipo="submit" carregando={carregandoDados} desabilitado={carregandoDados}>{textos.perfil.salvar}</Botao></div>
+          <div className="perfil-grupo__cabecalho"><h2 id="perfil-pessoais-titulo">{textos.perfil.informacoesPessoais}</h2></div>
           {mensagemDados && <Alerta variante={tipoDados}>{mensagemDados}</Alerta>}
           <div className="perfil-grupo__campos">
             <CampoTexto ref={nomeRef} id="perfil-nome" label={textos.perfil.nome} valor={dados.nome} onChange={(evento) => alterarDados("nome", evento.target.value)} erro={errosDados.nome} autoComplete="name" desabilitado={carregandoDados} required />
             <CampoTexto ref={emailRef} id="perfil-email" label={textos.perfil.email} tipo="email" valor={dados.email} onChange={(evento) => alterarDados("email", evento.target.value)} erro={errosDados.email} autoComplete="email" desabilitado={carregandoDados} required />
           </div>
+          <div className="perfil-grupo__acoes"><Botao tipo="submit" carregando={carregandoDados} desabilitado={carregandoDados}>{textos.perfil.salvar}</Botao></div>
         </form>
         <form className="perfil-grupo" id="seguranca" ref={segurancaRef} onSubmit={salvarSenha} noValidate aria-labelledby="perfil-seguranca-titulo">
-          <div className="perfil-grupo__cabecalho"><h2 id="perfil-seguranca-titulo">{textos.perfil.seguranca}</h2><Botao tipo="submit" carregando={carregandoSenha} desabilitado={carregandoSenha}>{textos.perfil.salvar}</Botao></div>
+          <div className="perfil-grupo__cabecalho"><h2 id="perfil-seguranca-titulo">{textos.perfil.seguranca}</h2></div>
           {mensagemSenha && <Alerta variante={tipoSenha}>{mensagemSenha}</Alerta>}
           <div className="perfil-grupo__campos">
             <CampoTexto ref={senhaAtualRef} id="perfil-senha-atual" label={textos.perfil.senhaAtual} tipo="password" valor={senhas.atual} onChange={(evento) => alterarSenhas("atual", evento.target.value)} erro={errosSenha.atual} autoComplete="current-password" desabilitado={carregandoSenha} required />
             <CampoTexto ref={senhaNovaRef} id="perfil-senha-nova" label={textos.perfil.senhaNova} tipo="password" valor={senhas.nova} onChange={(evento) => alterarSenhas("nova", evento.target.value)} erro={errosSenha.nova} autoComplete="new-password" desabilitado={carregandoSenha} required />
             <CampoTexto ref={confirmarRef} id="perfil-confirmar-senha" label={textos.perfil.confirmarSenha} tipo="password" valor={senhas.confirmar} onChange={(evento) => alterarSenhas("confirmar", evento.target.value)} erro={errosSenha.confirmar} autoComplete="new-password" desabilitado={carregandoSenha} required />
           </div>
+          <div className="perfil-grupo__acoes"><Botao tipo="submit" carregando={carregandoSenha} desabilitado={carregandoSenha}>{textos.perfil.salvar}</Botao></div>
         </form>
       </section>
     </div>
+
+    {confirmarRemocao && <DialogoVenda titulo={textos.perfil.removerFotoTitulo} onFechar={() => { if (!removendoFoto) setConfirmarRemocao(false); }}>
+      <p>{textos.perfil.removerFotoConfirmacao}</p>
+      <div className="dialogo-venda__acoes"><Botao variante="secundario" onClick={() => setConfirmarRemocao(false)} desabilitado={removendoFoto}>{textos.perfil.cancelar}</Botao><Botao onClick={confirmarRemocaoFoto} carregando={removendoFoto} desabilitado={removendoFoto}>{textos.perfil.remover}</Botao></div>
+    </DialogoVenda>}
   </section>;
 }

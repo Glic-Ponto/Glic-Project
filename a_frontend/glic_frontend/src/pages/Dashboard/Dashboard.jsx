@@ -85,7 +85,7 @@ export default function Dashboard() {
       <div><span>{t.despesas}</span><strong>{moeda(resumo?.despesas)}</strong></div>
       <div><span>{t.resultado}</span><strong>{moeda(resumo?.resultado)}</strong></div>
     </section>
-    {usuario?.perfil === "Gestor" && <HistoricoFinanceiro />}
+    {["GERENTE", "ADMIN"].includes(usuario?.perfil) && <HistoricoFinanceiro />}
     {modalPeriodo && <DialogoVenda titulo="Período personalizado" onFechar={() => setModalPeriodo(false)} classe="dashboard__dialogo-periodo">
       <p>Selecione a data inicial e a data final para o gráfico.</p>
       <div className="dashboard__datas"><label>Data inicial<input type="date" value={rascunhoPersonalizado.inicio} onChange={e => { setRascunhoPersonalizado(atual => ({ ...atual, inicio: e.target.value })); setErroPeriodo(""); }} /></label><label>Data final<input type="date" value={rascunhoPersonalizado.fim} onChange={e => { setRascunhoPersonalizado(atual => ({ ...atual, fim: e.target.value })); setErroPeriodo(""); }} /></label></div>

@@ -23,7 +23,7 @@ export default function MenuLateral({ aberto = false, onNavegar }) {
     <nav className={`menu-lateral ${aberto ? "menu-lateral--aberto" : ""}`} aria-label="Menu principal">
       <div className="menu-lateral__marca"><img src="/assets/logo-oficina-dsom.png" alt="Oficina DSom" /></div>
       <div className="menu-lateral__links">
-        {[...itens, ...(usuario?.perfil === "Gestor" ? [{ to: rotas.usuarios, label: "Usuários", Icon: UsersRound }] : [])].map(({ to, label, Icon }) => (
+        {[...itens, ...(["GERENTE", "ADMIN"].includes(usuario?.perfil) ? [{ to: rotas.usuarios, label: "Usuários", Icon: UsersRound }] : [])].map(({ to, label, Icon }) => (
           <NavLink key={to} to={to} onClick={onNavegar} className={({ isActive }) => `menu-lateral__item${isActive ? " menu-lateral__item--ativo" : ""}`}>
             <Icon aria-hidden="true" size={20} /><span>{label}</span>
           </NavLink>

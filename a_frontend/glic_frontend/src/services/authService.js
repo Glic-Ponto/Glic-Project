@@ -1,53 +1,55 @@
-import { usuariosMock } from "../mocks/usuarios";
-import { atrasoMock } from "./api";
-
-function usuarioSeguro(usuario) {
-  const { senha: _senha, ...dados } = usuario;
-  return dados;
-}
+import { requisicao } from "./api";
 
 export async function autenticar(email, senha) {
-  await atrasoMock();
-  const usuario = usuariosMock.find((item) => item.email.toLowerCase() === email.trim().toLowerCase() && item.senha === senha);
-  if (!usuario) throw new Error("E-mail ou senha incorretos. Confira os dados e tente novamente.");
-  if (usuario.ativo === false) throw new Error("Esta conta está inativa e não pode ser acessada.");
-  return usuarioSeguro(usuario);
+  try {
+    return await requisicao("/usuarios/login", {
+      method: "POST",
+      body: JSON.stringify({ email: email.trim(), senha })
+    });
+  } catch (erro) {
+    if (erro.status === 401) throw new Error("E-mail ou senha incorretos. Confira os dados e tente novamente.");
+    if (erro.status === 403) throw new Error("Esta conta está inativa e não pode ser acessada.");
+    throw erro;
+  }
 }
 
 export async function registrarUsuario({ nome, email, senha }) {
-  await atrasoMock();
-  if (usuariosMock.some((item) => item.email.toLowerCase() === email.trim().toLowerCase())) {
-    throw new Error("[texto a definir]");
+  try {
+    return await requisicao("/usuarios/cadastro", {
+      method: "POST",
+      body: JSON.stringify({ nome: nome.trim(), email: email.trim(), senha })
+    });
+  } catch (erro) {
+    if (erro.status === 409) throw new Error("Já existe um usuário com este e-mail.");
+    throw erro;
   }
-  const usuario = {
-    id: `u-${Date.now()}`,
-    nome: nome.trim(),
-    email: email.trim(),
-    senha,
-    perfil: "Funcionário",
-    foto: ""
-  };
-  usuariosMock.push(usuario);
-  return usuarioSeguro(usuario);
 }
 
 export async function atualizarUsuario(id, alteracoes) {
-  await atrasoMock();
-  const usuario = usuariosMock.find((item) => item.id === id);
-  if (!usuario) throw new Error("[texto a definir]");
-  if (alteracoes.email && usuariosMock.some((item) => item.id !== id && item.email.toLowerCase() === alteracoes.email.trim().toLowerCase())) {
-    throw new Error("[texto a definir]");
+  try {
+    return await requisicao(`/usuarios/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(alteracoes)
+    });
+  } catch (erro) {
+    if (erro.status === 404) throw new Error("Usuário não encontrado.");
+    if (erro.status === 409) throw new Error("Já existe um usuário com este e-mail.");
+    throw erro;
   }
-  Object.assign(usuario, alteracoes);
-  return usuarioSeguro(usuario);
 }
 
 export async function atualizarSenha(id, senhaAtual, senhaNova) {
-  await atrasoMock();
-  const usuario = usuariosMock.find((item) => item.id === id);
-  if (!usuario || usuario.senha !== senhaAtual) throw new Error("A senha atual está incorreta.");
-  usuario.senha = senhaNova;
-  return true;
+  try {
+    await requisicao(`/usuarios/${id}/senha`, {
+      method: "PUT",
+      body: JSON.stringify({ senhaAtual, senhaNova })
+    });
+    return true;
+  } catch (erro) {
+    if (erro.status === 401) throw new Error("A senha atual está incorreta.");
+    if (erro.status === 404) throw new Error("Usuário não encontrado.");
+    throw erro;
+  }
 }
 
 export function criarSessao(usuario) {

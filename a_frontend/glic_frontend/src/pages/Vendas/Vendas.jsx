@@ -26,7 +26,7 @@ export default function Vendas() {
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState("");
   const [selecionada, setSelecionada] = useState(null);
-  const podeVender = ["Funcionário", "Gestor"].includes(usuario?.perfil);
+  const podeVender = ["FUNCIONARIO", "GERENTE", "ADMIN"].includes(usuario?.perfil);
   useEffect(() => {
     let ativo = true;
     listarVendas().then(d => { if (ativo) setVendas(d); }).catch(() => { if (ativo) setErro("Não foi possível carregar as vendas."); }).finally(() => { if (ativo) setCarregando(false); });

@@ -51,7 +51,7 @@ export default function Estoque() {
   const [salvandoProduto, setSalvandoProduto] = useState(false);
   const [confirmarDescarte, setConfirmarDescarte] = useState(false);
   const [sucesso, setSucesso] = useState("");
-  const podeCadastrar = ["Gestor", "Funcionário"].includes(usuario?.perfil);
+  const podeCadastrar = ["GERENTE", "FUNCIONARIO", "ADMIN"].includes(usuario?.perfil);
 
   useEffect(() => {
     let ativo = true;

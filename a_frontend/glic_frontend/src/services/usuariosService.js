@@ -10,7 +10,7 @@ export async function cadastrarUsuario(dados) {
   if (usuariosMock.some((usuario) => usuario.email.toLowerCase() === dados.email.toLowerCase())) {
     throw new Error("Já existe um usuário com este e-mail.");
   }
-  const usuario = { id: `u-${Date.now()}`, perfil: "Funcionário", ativo: true, criadoEm: new Date().toISOString(), ...dados };
+  const usuario = { id: `u-${Date.now()}`, perfil: "FUNCIONARIO", ativo: true, criadoEm: new Date().toISOString(), ...dados };
   usuariosMock.push(usuario);
   const { senha: _senha, ...usuarioSeguro } = usuario;
   return usuarioSeguro;

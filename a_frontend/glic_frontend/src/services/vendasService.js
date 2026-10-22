@@ -13,7 +13,7 @@ const operacoes = new Map();
 const proximoId = () => "V-" + String(Math.max(0, ...vendasMock.map(v => Number(v.id?.replace(/^V-/, "")) || 0)) + 1).padStart(4, "0");
 
 function validarUsuario(usuario) {
-  if (!usuario?.id || !["Funcionário", "Gestor"].includes(usuario.perfil)) throw new Error("Somente funcionários e gestores podem registrar vendas.");
+  if (!usuario?.id || !["FUNCIONARIO", "GERENTE", "ADMIN"].includes(usuario.perfil)) throw new Error("Somente funcionários e gestores podem registrar vendas.");
 }
 function configurar(valor = {}) {
   const resultado = {};
