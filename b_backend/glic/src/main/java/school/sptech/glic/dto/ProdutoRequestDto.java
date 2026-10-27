@@ -1,5 +1,7 @@
 package school.sptech.glic.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -7,37 +9,46 @@ import jakarta.validation.constraints.Size;
 
 public class ProdutoRequestDto {
 
+    @Schema(description = "Nome do produto", example = "Central multimídia")
     @NotBlank(message = "O nome do produto é obrigatório")
     @Size(max = 100, message = "O nome deve ter no máximo 100 caracteres")
     private String nome;
 
+    @Schema(description = "Categoria do produto", example = "Multimídia")
     @NotBlank(message = "A categoria é obrigatória")
     @Size(max = 100, message = "A categoria deve ter no máximo 100 caracteres")
     private String categoria;
 
+    @Schema(description = "Marca do produto", example = "Universal")
     @NotBlank(message = "A marca é obrigatória")
     @Size(max = 80, message = "A marca deve ter no máximo 80 caracteres")
     private String marca;
 
+    @Schema(description = "Fornecedor do produto (opcional)", example = "Pioneer Distribuidora")
     @Size(max = 100, message = "O fornecedor deve ter no máximo 100 caracteres")
     private String fornecedor;
 
+    @Schema(description = "Quantidade em estoque", example = "5")
     @NotNull(message = "A quantidade é obrigatória")
     @PositiveOrZero(message = "A quantidade não pode ser negativa")
     private Integer quantidade;
 
+    @Schema(description = "Preço de venda", example = "890.0")
     @NotNull(message = "O preço é obrigatório")
     @PositiveOrZero(message = "O preço não pode ser negativo")
     private Double preco;
 
+    @Schema(description = "Estoque mínimo antes de gerar alerta", example = "2")
     @NotNull(message = "O estoque mínimo é obrigatório")
     @PositiveOrZero(message = "O estoque mínimo não pode ser negativo")
     private Integer minimo;
 
+    @Schema(description = "Unidade de medida", example = "un.")
     @NotBlank(message = "A unidade de medida é obrigatória")
     @Size(max = 20, message = "A unidade deve ter no máximo 20 caracteres")
     private String unidade;
 
+    @Schema(description = "Imagem do produto em base64 (data URL), opcional", example = "data:image/png;base64,iVBORw0KGgo...")
     private String imagem;
 
     public String getNome() { return nome; }

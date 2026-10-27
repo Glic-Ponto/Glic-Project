@@ -1,8 +1,12 @@
 package school.sptech.glic.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 public class CategoriaValorDto {
 
+    @Schema(description = "Nome da categoria", example = "Películas")
     private String nome;
+    @Schema(description = "Valor faturado na categoria no período", example = "540.0")
     private Double valor;
 
     public CategoriaValorDto() {

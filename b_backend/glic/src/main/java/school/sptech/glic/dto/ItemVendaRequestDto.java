@@ -1,5 +1,7 @@
 package school.sptech.glic.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -7,22 +9,30 @@ import jakarta.validation.constraints.PositiveOrZero;
 
 public class ItemVendaRequestDto {
 
+    @Schema(description = "Identificador do produto no front-end. Atualmente não é usado; o produto é localizado pelo nome", example = "1")
     private String produtoId;
 
+    @Schema(description = "Nome do produto. Se não existir, é cadastrado automaticamente", example = "Película automotiva")
     @NotBlank(message = "O nome do item é obrigatório")
     private String nome;
 
+    @Schema(description = "Categoria do produto", example = "Películas")
     @NotBlank(message = "A categoria do item é obrigatória")
     private String categoria;
 
+    @Schema(description = "Descrição do serviço. Usada como descrição ao cadastrar um produto novo", example = "Instalação de insulfilm")
     private String servico;
+    @Schema(description = "Tipo de veículo. Atualmente não é gravado pelo back-end", example = "Carro")
     private String tipoVeiculo;
+    @Schema(description = "Área de aplicação. Atualmente não é gravada pelo back-end", example = "Vidros laterais")
     private String area;
 
+    @Schema(description = "Quantidade vendida", example = "2")
     @NotNull(message = "A quantidade é obrigatória")
     @Positive(message = "A quantidade deve ser maior que zero")
     private Integer quantidade;
 
+    @Schema(description = "Preço unitário", example = "180.0")
     @NotNull(message = "O preço é obrigatório")
     @PositiveOrZero(message = "O preço não pode ser negativo")
     private Double preco;

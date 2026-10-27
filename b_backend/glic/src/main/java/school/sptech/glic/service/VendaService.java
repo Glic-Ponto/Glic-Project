@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import school.sptech.glic.dto.ItemVendaRequestDto;
 import school.sptech.glic.dto.VendaRequestDto;
+import school.sptech.glic.dto.VendaResponseDto;
 import school.sptech.glic.entity.ItemVenda;
 import school.sptech.glic.entity.MovimentacaoFinanceira;
 import school.sptech.glic.entity.Produto;
@@ -39,11 +40,11 @@ public class VendaService {
         this.movimentacaoRepository = movimentacaoRepository;
     }
 
-    public List<Venda> listarVendas() {
-        return vendaRepository.findAllByOrderByDataVendaDesc();
+    public List<VendaResponseDto> listarVendas() {
+        return vendaRepository.findAllByOrderByDataVendaDesc().stream().map(VendaResponseDto::new).toList();
     }
 
-    public Venda registrarVenda(VendaRequestDto dto) {
+    public VendaResponseDto registrarVenda(VendaRequestDto dto) {
         double subtotalVenda = 0.0;
 
         Venda venda = new Venda();
@@ -97,7 +98,7 @@ public class VendaService {
         );
         movimentacaoRepository.save(mov);
 
-        return salva;
+        return new VendaResponseDto(salva);
     }
 
     private Produto buscarOuCriarProduto(ItemVendaRequestDto itemDto) {

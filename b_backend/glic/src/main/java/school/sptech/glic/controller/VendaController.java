@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import school.sptech.glic.dto.VendaRequestDto;
-import school.sptech.glic.entity.Venda;
+import school.sptech.glic.dto.VendaResponseDto;
 import school.sptech.glic.service.VendaService;
 
 import java.util.List;
@@ -36,8 +36,8 @@ public class VendaController {
             @ApiResponse(responseCode = "200", description = "Lista de vendas retornada com sucesso"),
             @ApiResponse(responseCode = "204", description = "Nenhuma venda encontrada")
     })
-    public ResponseEntity<List<Venda>> listarVendas() {
-        List<Venda> vendas = vendaService.listarVendas();
+    public ResponseEntity<List<VendaResponseDto>> listarVendas() {
+        List<VendaResponseDto> vendas = vendaService.listarVendas();
         if (vendas.isEmpty()) {
             return ResponseEntity.status(204).build();
         }
@@ -50,8 +50,8 @@ public class VendaController {
             @ApiResponse(responseCode = "201", description = "Venda registrada com sucesso"),
             @ApiResponse(responseCode = "400", description = "Dados da venda inválidos")
     })
-    public ResponseEntity<Venda> registrarVenda(@Valid @RequestBody VendaRequestDto dto) {
-        Venda salva = vendaService.registrarVenda(dto);
+    public ResponseEntity<VendaResponseDto> registrarVenda(@Valid @RequestBody VendaRequestDto dto) {
+        VendaResponseDto salva = vendaService.registrarVenda(dto);
         return ResponseEntity.status(201).body(salva);
     }
 }

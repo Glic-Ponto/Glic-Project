@@ -1,19 +1,33 @@
 package school.sptech.glic.dto;
 
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.util.List;
 
 public class DashboardResumoResponseDto {
 
+    @Schema(description = "Intervalo de datas considerado no resumo")
     private IntervaloDashboardDto intervalo;
+    @Schema(description = "Soma do valor total das vendas no período", example = "1590.0")
     private Double faturamento;
+    @Schema(description = "Quantidade de vendas no período", example = "2")
     private Integer vendas;
+    @Schema(description = "Valor médio por venda no período", example = "795.0")
     private Double ticketMedio;
+    @Schema(description = "Soma dos descontos concedidos no período", example = "50.0")
     private Double descontos;
+    @Schema(description = "Total de receitas no período", example = "1590.0")
     private Double receitas;
+    @Schema(description = "Total de despesas no período", example = "320.0")
     private Double despesas;
+    @Schema(description = "Resultado do período (receitas menos despesas)", example = "1270.0")
     private Double resultado;
+    @ArraySchema(schema = @Schema(description = "Ponto do gráfico de faturamento (por dia, ou por hora quando o período é de um único dia)"))
     private List<PontoGraficoDto> faturamentoPorDia;
+    @ArraySchema(schema = @Schema(description = "Faturamento de uma categoria no período"))
     private List<CategoriaValorDto> faturamentoPorCategoria;
+    @ArraySchema(schema = @Schema(description = "Serviço do ranking dos mais vendidos (até 5 itens)"))
     private List<ServicoRankingDto> servicosMaisVendidos;
 
     public DashboardResumoResponseDto() {

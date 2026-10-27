@@ -1,6 +1,7 @@
 package school.sptech.glic.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -35,8 +36,11 @@ public class DashboardController {
             @ApiResponse(responseCode = "400", description = "Período personalizado inválido")
     })
     public ResponseEntity<DashboardResumoResponseDto> obterResumo(
+            @Parameter(description = "Período do resumo: hoje, 7dias, 30dias ou personalizado", example = "hoje")
             @RequestParam(defaultValue = "hoje") String periodo,
+            @Parameter(description = "Data inicial (yyyy-MM-dd). Obrigatória quando o período é personalizado", example = "2026-10-01")
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate inicio,
+            @Parameter(description = "Data final (yyyy-MM-dd). Obrigatória quando o período é personalizado e não pode ser anterior à inicial", example = "2026-10-27")
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fim
     ) {
         DashboardResumoResponseDto resumo = dashboardService.obterResumo(periodo, inicio, fim);

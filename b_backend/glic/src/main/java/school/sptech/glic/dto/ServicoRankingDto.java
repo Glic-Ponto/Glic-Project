@@ -1,9 +1,14 @@
 package school.sptech.glic.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 public class ServicoRankingDto {
 
+    @Schema(description = "Identificador do item no ranking", example = "Instalação de multimídia-0")
     private String id;
+    @Schema(description = "Nome do serviço", example = "Instalação de multimídia")
     private String nome;
+    @Schema(description = "Quantidade vendida no período", example = "3")
     private Integer quantidade;
 
     public ServicoRankingDto() {

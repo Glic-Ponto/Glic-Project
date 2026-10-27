@@ -1,6 +1,7 @@
 package school.sptech.glic.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -63,7 +64,11 @@ public class UsuarioController {
             @ApiResponse(responseCode = "404", description = "Usuário não encontrado"),
             @ApiResponse(responseCode = "409", description = "Já existe outro usuário com este e-mail")
     })
-    public ResponseEntity<UsuarioResponseDto> atualizar(@PathVariable Integer id, @Valid @RequestBody UsuarioAtualizacaoRequestDto dto) {
+    public ResponseEntity<UsuarioResponseDto> atualizar(
+            @Parameter(description = "Identificador do usuário", example = "1")
+            @PathVariable Integer id,
+            @Valid @RequestBody UsuarioAtualizacaoRequestDto dto
+    ) {
         return ResponseEntity.ok(usuarioService.atualizar(id, dto));
     }
 
@@ -75,7 +80,11 @@ public class UsuarioController {
             @ApiResponse(responseCode = "401", description = "Senha atual incorreta"),
             @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
     })
-    public ResponseEntity<Void> atualizarSenha(@PathVariable Integer id, @Valid @RequestBody UsuarioSenhaRequestDto dto) {
+    public ResponseEntity<Void> atualizarSenha(
+            @Parameter(description = "Identificador do usuário", example = "1")
+            @PathVariable Integer id,
+            @Valid @RequestBody UsuarioSenhaRequestDto dto
+    ) {
         usuarioService.atualizarSenha(id, dto);
         return ResponseEntity.noContent().build();
     }
