@@ -48,7 +48,7 @@ public class Usuario {
     private LocalDateTime dataCriacao;
 
     @Lob
-    @Column(name = "foto")
+    @Column(name = "foto", columnDefinition = "LONGTEXT")
     private String foto; // imagem em base64 (data URL)
 
     public Usuario() {

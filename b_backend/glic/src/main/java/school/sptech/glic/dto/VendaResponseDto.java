@@ -7,7 +7,7 @@ import school.sptech.glic.entity.Venda;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class VendaResponseDto {
+public class    VendaResponseDto {
 
     @Schema(description = "Identificador da venda", example = "1")
     private Integer id;

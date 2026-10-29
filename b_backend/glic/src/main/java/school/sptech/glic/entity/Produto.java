@@ -58,7 +58,7 @@ public class Produto {
     private String unidade;
 
     @Lob
-    @Column(name = "imagem")
+    @Column(name = "imagem", columnDefinition = "LONGTEXT")
     private String imagem;
 
     @NotNull
